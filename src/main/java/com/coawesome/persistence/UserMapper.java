@@ -11,6 +11,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserMapper {
 
     //회원가입
-    @Insert("INSERT INTO user(u_id, user_id, u_name) VALUES(#{u_id}, #{user_id}, #{u_name})")
+    @Insert("INSERT INTO user(u_id, login_id, u_name) VALUES(#{u_id}, #{login_id}, #{u_name})")
     void addUser(UserVO user);
 }

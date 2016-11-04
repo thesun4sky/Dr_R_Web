@@ -46,7 +46,7 @@ public class FileUtils {
             image.setStored_file_name(storedFileName);
             image.setFile_size(multipartFile.getSize());
             image.setBoard_id(board.getBoard_id());
-            image.setCreator_id(board.getUser_id());
+            image.setCreator_id(board.getU_id());
             System.out.println(image);
         }
         return image;
@@ -74,7 +74,7 @@ public class FileUtils {
             multipartFile.transferTo(file);
 
             image.setUser_img(storedFileName);  //저장된 이미지 이름
-            image.setUser_id(user.getU_id());
+            image.setLogin_id(user.getU_id());
             System.out.println(image);
         }
         return image;

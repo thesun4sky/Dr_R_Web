@@ -18,7 +18,7 @@ import java.util.ArrayList;
 @AllArgsConstructor
 public class BoardVO {
     private int board_id;
-    private int user_id;
+    private int u_id;
     private int public_level;
     private int likes_num;
     private int favorite_num;
