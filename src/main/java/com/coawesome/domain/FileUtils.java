@@ -19,6 +19,7 @@ public class FileUtils {
     }
 
     public boolean deleteFile(String fileName){
+        //check
         File file = new File(filePath+fileName);
         return (file.delete());
     }
