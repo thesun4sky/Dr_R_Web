@@ -24,8 +24,25 @@ public class ApiController {
     private FileUtils fileUtils;
 
 
+    //아이디 체크
+    @RequestMapping(method = RequestMethod.POST, value = "/user/checkID")
+    public boolean checkUserId(@RequestBody UserVO user) throws Exception {
+
+        System.out.println("cehck ID : " + user.getLogin_id());
+        String found_id = userMapper.checkUserId(user);
+        System.out.println("아이디 중복 체크 id: " + user.getLogin_id()+ "<< input id ,  found_id  >>" + found_id);
+        if(user.getLogin_id().equals(found_id)){
+            System.out.println("아이디 있음. 사용 불가");
+            return false;
+        }
+        else {
+            System.out.println("아이디 없음. 사용 가능");
+            return true;
+        }
+    }
+
     //회원가입
-    @RequestMapping(method = RequestMethod.POST, value = "/get/userData")
+    @RequestMapping(method = RequestMethod.POST, value = "/user/join")
     public String getUserData(@RequestBody UserVO user) throws Exception {
 
         System.out.println("Sign in : " + user.getU_name());
