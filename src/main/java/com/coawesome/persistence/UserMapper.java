@@ -22,7 +22,7 @@ public interface UserMapper {
 
 
     //회원가입
-    @Insert("INSERT INTO user(u_id, login_id, u_password, u_name) VALUES(#{u_id}, #{login_id}, #{u_password}, #{u_name})")
+    @Insert("INSERT INTO user(u_id, login_id, u_password, u_name, u_hospital) VALUES(#{u_id}, #{login_id}, #{u_password}, #{u_name}, #{u_hospital})")
     void addUser(UserVO user);
 
     //아이디 체크
