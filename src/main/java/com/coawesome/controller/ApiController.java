@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by TeasunKim on 2016-11-03.
@@ -41,6 +42,8 @@ public class ApiController {
             return true;
         }
     }
+
+
 
     //회원가입
     @RequestMapping(method = RequestMethod.POST, value = "/user/join")
