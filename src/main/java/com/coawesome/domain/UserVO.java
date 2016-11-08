@@ -13,5 +13,36 @@ import lombok.NoArgsConstructor;
 public class UserVO {
     private int u_id;
     private String login_id;
+    private String u_password;
     private String u_name;
+
+    public int getU_id() {
+        return u_id;
+    }
+
+    public String getLogin_id() {
+        return login_id;
+    }
+
+    public String getU_name() {
+        return u_name;
+    }
+
+    public  String getU_password(){
+        return u_password;
+    }
+    public void setLogin_id(String login_id) {
+        this.login_id = login_id;
+    }
+
+    public void setU_name(String u_name) {
+        this.u_name = u_name;
+    }
+
+    public void setU_id(int u_id) {
+        this.u_id = u_id;
+    }
+    public void setU_password(String u_password){
+        this.u_password = u_password;
+    }
 }
