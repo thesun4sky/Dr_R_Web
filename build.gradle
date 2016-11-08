@@ -30,7 +30,7 @@ dependencies {
 	compile('org.projectlombok:lombok')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-
+	compile group: 'commons-codec', name: 'commons-codec', version: '1.4'
 	compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1")
 	runtime("mysql:mysql-connector-java")
 
