@@ -16,6 +16,10 @@ public interface UserMapper {
     @Select("select login_id from user where login_id = #{login_id}")
     String checkUserId(UserVO user);
 
+    //이름 찾기
+    @Select("select u_name from user where login_id = #{login_id}")
+    String findName(UserVO user);
+
 
     //회원가입
     @Insert("INSERT INTO user(u_id, login_id, u_name) VALUES(#{u_id}, #{login_id}, #{u_name})")
