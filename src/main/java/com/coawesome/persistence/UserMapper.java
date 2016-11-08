@@ -20,4 +20,9 @@ public interface UserMapper {
     //회원가입
     @Insert("INSERT INTO user(u_id, login_id, u_password, u_name) VALUES(#{u_id}, #{login_id}, #{u_password}, #{u_name})")
     void addUser(UserVO user);
+
+    //아이디 체크
+    @Select("select u_password from user where login_id = #{login_id}")
+    String checkLogin(UserVO user);
+
 }
