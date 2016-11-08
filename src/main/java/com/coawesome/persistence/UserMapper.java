@@ -18,6 +18,6 @@ public interface UserMapper {
 
 
     //회원가입
-    @Insert("INSERT INTO user(u_id, login_id, u_name) VALUES(#{u_id}, #{login_id}, #{u_name})")
+    @Insert("INSERT INTO user(u_id, login_id, u_password, u_name) VALUES(#{u_id}, #{login_id}, #{u_password}, #{u_name})")
     void addUser(UserVO user);
 }
