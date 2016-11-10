@@ -11,6 +11,10 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface UserMapper {
 
+    //안드로이드 기기ID 체크
+    @Select("select u_device from user where u_device = #{u_device}")
+    String checkDeviceId(UserVO user);
+
     //아이디 체크
     @Select("select login_id from user where login_id = #{login_id}")
     String checkUserId(UserVO user);
@@ -22,6 +26,10 @@ public interface UserMapper {
     //이름 찾기
     @Select("select u_name from user where login_id = #{login_id}")
     String findName(UserVO user);
+
+    //안드로이드 기기ID로 이름 찾기
+    @Select("select u_name from user where u_device = #{u_device}")
+    String aFindName(UserVO user);
 
     //비밀전호 찾기
     @Select("select u_password from user where login_id = #{login_id} and u_name = #{u_name}")

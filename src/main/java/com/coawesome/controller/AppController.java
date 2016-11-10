@@ -27,22 +27,20 @@ public class AppController {
     private FileUtils fileUtils;
 
 
-    @RequestMapping(value= "/checkUser",method= RequestMethod.POST)
+    @RequestMapping(value= "/checkDevice",method= RequestMethod.POST)
     public ResultVO TestPost(HttpServletRequest request) {
         UserVO userVO = new UserVO();
-        userVO.setLogin_id(request.getParameter("device_id"));
-        System.out.println("UUID : " + userVO.getLogin_id());
-        String found_id = userMapper.checkUserId(userVO);
-        if(userVO.getLogin_id().equals(found_id)){
+        userVO.setU_device(request.getParameter("u_device"));
+        System.out.println("UUID : " + userVO.getU_device());
+        String found_id = userMapper.checkDeviceId(userVO);
+        if(userVO.getU_device().equals(found_id)){
             System.out.println("아이디 있음. 자동로그인");
-            userVO.setU_name(userMapper.findName(userVO));
+            userVO.setU_name(userMapper.aFindName(userVO));
             return new ResultVO(userVO.getU_name(),1);
         }
         else {
-            System.out.println("아이디 없음. 회원가입");
-            userVO.setU_name("김태선");
-            userMapper.addUser(userVO);
-            return new ResultVO("새로오신"+userVO.getU_name(),0);
+            System.out.println("아이디 없음. 회원가입 필요");
+            return new ResultVO("신규 사용자",0);
         }
     }
 
@@ -105,10 +103,11 @@ public class AppController {
         UserVO userVO = new UserVO();
         userVO.setLogin_id(request.getParameter("login_id"));
         userVO.setU_name(request.getParameter("u_name"));
-        userVO.setPassword(request.getParameter("password"));
-        userVO.setPhone(request.getParameter("phone"));
-        userVO.setDisease(request.getParameter("disease"));
-        userVO.setHospital_name(request.getParameter("hospital_name"));
+        userVO.setU_password(request.getParameter("u_password"));
+        userVO.setU_phone(request.getParameter("u_phone"));
+        userVO.setU_disease(request.getParameter("u_disease"));
+        userVO.setU_hospital(request.getParameter("u_hospital"));
+        userVO.setU_device(request.getParameter("u_device"));
         System.out.println(userVO.toString());
 
         return new ResultVO("정상 작동",1);
