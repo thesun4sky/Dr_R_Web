@@ -15,5 +15,8 @@ public class UserVO {
     private String login_id;
     private String u_password;
     private String u_name;
+    private String phone;
+    private String password;
+    private String disease;
     private String u_hospital;
 }

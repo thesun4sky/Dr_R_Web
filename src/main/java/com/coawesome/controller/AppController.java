@@ -46,6 +46,23 @@ public class AppController {
         }
     }
 
+    @RequestMapping(value= "/checkLoginId",method= RequestMethod.POST)
+    public ResultVO checkLoginId(HttpServletRequest request) {
+        String login_id = request.getParameter("login_id");
+        System.out.println("Login_id check : " + login_id);
+        UserVO userVO = new UserVO();
+        userVO.setLogin_id(login_id);
+        String found_id = userMapper.checkUserLoginId(userVO);
+        if(userVO.getLogin_id().equals(found_id)){
+            //System.out.println("아이디 있음. 사용 불가");
+            return new ResultVO("",1);
+        }
+        else {
+            //System.out.println("아이디 없음. 사용 가능");
+            return new ResultVO(userVO.getLogin_id(),0);
+        }
+    }
+
     @RequestMapping(value= "/writeDiary",method= RequestMethod.POST)
     public ResultVO writeDiary(HttpServletRequest request) {
         DiaryVO diaryVO = new DiaryVO();
@@ -81,5 +98,19 @@ public class AppController {
         return diaryVO;
     }
 
+    @RequestMapping(value= "/joinUser",method= RequestMethod.POST)
+    public ResultVO joinUser(HttpServletRequest request) {
+        System.out.println("joinUser called");
 
+        UserVO userVO = new UserVO();
+        userVO.setLogin_id(request.getParameter("login_id"));
+        userVO.setU_name(request.getParameter("u_name"));
+        userVO.setPassword(request.getParameter("password"));
+        userVO.setPhone(request.getParameter("phone"));
+        userVO.setDisease(request.getParameter("disease"));
+        userVO.setHospital_name(request.getParameter("hospital_name"));
+        System.out.println(userVO.toString());
+
+        return new ResultVO("정상 작동",1);
+    }
 }
