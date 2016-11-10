@@ -27,14 +27,14 @@ public class AppController {
     private FileUtils fileUtils;
 
 
-    @RequestMapping(value= "/checkUser",method= RequestMethod.POST)
-    public ResultVO TestPost(HttpServletRequest request) {
+    @RequestMapping(value= "/checkUserDevice",method= RequestMethod.POST)
+    public ResultVO checkUserDevice(HttpServletRequest request) {
         UserVO userVO = new UserVO();
-        userVO.setLogin_id(request.getParameter("device_id"));
-        System.out.println("UUID : " + userVO.getLogin_id());
-        String found_id = userMapper.checkUserId(userVO);
-        if(userVO.getLogin_id().equals(found_id)){
-            System.out.println("아이디 있음. 자동로그인");
+        userVO.setU_device(request.getParameter("u_device"));
+        System.out.println("u_device : " + userVO.getLogin_id());
+        String found_device = userMapper.checkUserDevice(userVO);
+        if(userVO.getU_device().equals(found_device)){
+            System.out.println("device 있음. 자동로그인");
             userVO.setU_name(userMapper.findName(userVO));
             return new ResultVO(userVO.getU_name(),1);
         }
@@ -81,7 +81,7 @@ public class AppController {
     }
 
     @RequestMapping(value= "/getDiaries",method= RequestMethod.POST)
-    public DiaryVO getDiary(HttpServletRequest request) {
+    public String getDiary(HttpServletRequest request) {
         System.out.println("u_id : " + request.getParameter("u_id"));
         System.out.println("getDiaries called");
         ArrayList<DiaryVO> arrayList = new ArrayList<DiaryVO>();
@@ -95,7 +95,7 @@ public class AppController {
         diaryVO.setC_lunch("lu5hi");
         arrayList.add(diaryVO);
         System.out.println(arrayList.toString());
-        return diaryVO;
+        return arrayList.toString();
     }
 
     @RequestMapping(value= "/joinUser",method= RequestMethod.POST)
@@ -105,10 +105,10 @@ public class AppController {
         UserVO userVO = new UserVO();
         userVO.setLogin_id(request.getParameter("login_id"));
         userVO.setU_name(request.getParameter("u_name"));
-        userVO.setPassword(request.getParameter("password"));
-        userVO.setPhone(request.getParameter("phone"));
-        userVO.setDisease(request.getParameter("disease"));
-        userVO.setHospital_name(request.getParameter("hospital_name"));
+        userVO.setU_password(request.getParameter("password"));
+        userVO.setU_phone(request.getParameter("phone"));
+        userVO.setU_disease(request.getParameter("disease"));
+        userVO.setU_hospital(request.getParameter("hospital_name"));
         System.out.println(userVO.toString());
 
         return new ResultVO("정상 작동",1);

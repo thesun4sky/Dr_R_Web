@@ -4,7 +4,7 @@ import com.coawesome.config.SendSimpleMail;
 import com.coawesome.cryptoUtil.AES256CipherTest;
 import com.coawesome.domain.*;
 import com.coawesome.persistence.DiaryMapper;
-import com.coawesome.persistence.UserMapper;
+import com.coawesome.persistence.DoctorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 public class ApiController {
 
     @Autowired
-    private UserMapper userMapper;
+    private DoctorMapper doctorMapper;
     @Autowired
     private DiaryMapper diaryMapper;
     @Resource(name = "fileUtils")
@@ -27,17 +27,17 @@ public class ApiController {
 
     //아이디 체크
     @RequestMapping(method = RequestMethod.POST, value = "/user/checkID")
-    public boolean checkUserId(@RequestBody UserVO user) throws Exception {
+    public boolean checkUserId(@RequestBody DoctorVO doctor) throws Exception {
 
-        System.out.println("cehck ID : " + user.getLogin_id());
-        String found_id = userMapper.checkUserId(user);
-        System.out.println("아이디 중복 체크 id: " + user.getLogin_id()+ "<< input id ,  found_id  >>" + found_id);
-        if(user.getLogin_id().equals(found_id)){
-            System.out.println("아이디 있음. 사용 불가");
+        System.out.println("check ID : " + doctor.getE_mail());
+        String found_Email = doctorMapper.checkUserEmail(doctor);
+        System.out.println("e_mail 중복 체크 e_mail : " + doctor.getE_mail()+ "<< input id ,  found_id  >>" + found_Email);
+        if(doctor.getE_mail().equals(found_Email)){
+            System.out.println("e_mail 있음. 사용 불가");
             return false;
         }
         else {
-            System.out.println("아이디 없음. 사용 가능");
+            System.out.println("e_mail 없음. 사용 가능");
             return true;
         }
     }
@@ -46,27 +46,27 @@ public class ApiController {
 
     //회원가입
     @RequestMapping(method = RequestMethod.POST, value = "/user/join")
-    public String getUserData(@RequestBody UserVO user) throws Exception {
-        System.out.println("Sign in : " + user.getLogin_id());
-        String ori_pass = user.getU_password();
+    public String getUserData(@RequestBody DoctorVO doctor) throws Exception {
+        System.out.println("Sign in : " + doctor.getE_mail());
+        String ori_pass = doctor.getA_password();
         //암호화
         System.out.println(ori_pass);
         AES256CipherTest aes = new AES256CipherTest(ori_pass);
         String en_pass = aes.encPass();
         //암호화한 후 set
-        user.setU_password(en_pass);
+        doctor.setA_password(en_pass);
         System.out.println(ori_pass+en_pass);
-        userMapper.addUser(user);
+        doctorMapper.addUser(doctor);
         return "true";
     }
 
     //로그인
     @RequestMapping(method = RequestMethod.POST, value = "/user/login")
-    public ResultVO checkLogin(@RequestBody UserVO user) throws Exception {
+    public ResultVO checkLogin(@RequestBody DoctorVO doctor) throws Exception {
 
-        System.out.println("Login Check : " + user.getLogin_id());
-        String input_pass = user.getU_password();
-        String password = userMapper.checkLogin(user);
+        System.out.println("Login Check : " + doctor.getE_mail());
+        String input_pass = doctor.getA_password();
+        String password = doctorMapper.doctorLogincheck(doctor);
         System.out.println("패스워드 일치 체크 ");
         //복호화된 패스워드와 일치 확인
         if(password != null) {
@@ -74,7 +74,7 @@ public class ApiController {
             String des_pass = aes.desPass();
             if (input_pass.equals(des_pass)) {
                 System.out.println("비밀번호 일치" );
-                return new ResultVO(userMapper.findName(user),1);
+                return new ResultVO(doctorMapper.findPass(doctor),1);
             } else {
                 System.out.println("비밀번호 불일치" );
                 return new ResultVO("비밀번호가 다릅니다",0);
@@ -87,9 +87,9 @@ public class ApiController {
 
     //비밀번호 찾기
     @RequestMapping(method = RequestMethod.POST, value = "/user/findPASS")
-    public ResultVO findPASS(@RequestBody UserVO user) throws Exception {
-        System.out.println("try to find pass: " + user);
-        String found_pass = userMapper.findPASS(user);
+    public ResultVO findPASS(@RequestBody DoctorVO doctor) throws Exception {
+        System.out.println("try to find pass: " + doctor);
+        String found_pass = doctorMapper.findPass(doctor);
         if(found_pass != null) {
             //비밀번호 복호화
             AES256CipherTest aes = new AES256CipherTest(found_pass);
@@ -97,7 +97,7 @@ public class ApiController {
 
             //메일로 비밀번호 전송
             SendSimpleMail mail = new SendSimpleMail();
-            mail.sendmail(des_pass, user.getLogin_id());
+            mail.sendmail(des_pass, doctor.getE_mail());
 
             return new ResultVO("success",0);
 
