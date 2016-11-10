@@ -11,36 +11,29 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface UserMapper {
 
-    //안드로이드 기기ID 체크
-    @Select("select u_device from user where u_device = #{u_device}")
-    String checkDeviceId(UserVO user);
 
-    //아이디 체크
-    @Select("select login_id from user where login_id = #{login_id}")
-    String checkUserId(UserVO user);
-
-    //아이디 체크
+    //로그인 아이디 체크
     @Select("select login_id from user where login_id = #{login_id}")
     String checkUserLoginId(UserVO user);
 
+    //device 체크
+    @Select("select u_device from user where u_device = #{u_device}")
+    String checkUserDevice(UserVO user);
+
     //이름 찾기
-    @Select("select u_name from user where login_id = #{login_id}")
+    @Select("select u_name from user where u_name = #{u_name}")
     String findName(UserVO user);
 
-    //안드로이드 기기ID로 이름 찾기
-    @Select("select u_name from user where u_device = #{u_device}")
-    String aFindName(UserVO user);
-
-    //비밀전호 찾기
+    //비밀번호 찾기
     @Select("select u_password from user where login_id = #{login_id} and u_name = #{u_name}")
-    String findPASS(UserVO user);
+    String findPass(UserVO user);
 
-    //회원가입(의사)
-    @Insert("INSERT INTO user(u_id, login_id, u_password, u_name, u_hospital, u_position) VALUES(#{u_id}, #{login_id}, #{u_password}, #{u_name}, #{u_hospital}, 1)")
+    //회원가입
+    @Insert("INSERT INTO user(login_id, u_password, u_name, u_phone, u_disease, u_hospital, u_device) VALUES(#{login_id}, #{u_password}, #{u_name}, #{u_phone}, #{u_disease}, #{u_hospital}, #{u_device})")
     void addUser(UserVO user);
 
     //로그인
     @Select("select u_password from user where login_id = #{login_id}")
-    String checkLogin(UserVO user);
+    String userLogincheck(UserVO user);
 
 }
