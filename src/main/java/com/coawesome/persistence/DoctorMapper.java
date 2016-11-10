@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Select;
 public interface DoctorMapper {
 
     //아이디 체크
-    @Select("select e_mail from user where e_mail = #{e_mail}")
+    @Select("select e_mail from doctor where e_mail = #{e_mail}")
     String checkUserEmail(DoctorVO doctor);
 
     //비밀번호 찾기
