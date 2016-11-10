@@ -105,10 +105,11 @@ public class AppController {
         UserVO userVO = new UserVO();
         userVO.setLogin_id(request.getParameter("login_id"));
         userVO.setU_name(request.getParameter("u_name"));
-        userVO.setU_password(request.getParameter("password"));
-        userVO.setU_phone(request.getParameter("phone"));
-        userVO.setU_disease(request.getParameter("disease"));
-        userVO.setU_hospital(request.getParameter("hospital_name"));
+        userVO.setU_password(request.getParameter("u_password"));
+        userVO.setU_phone(request.getParameter("u_phone"));
+        userVO.setU_disease(request.getParameter("u_disease"));
+        userVO.setU_hospital(request.getParameter("u_hospital_name"));
+        userVO.setU_device(request.getParameter("u_device"));
         System.out.println(userVO.toString());
 
         return new ResultVO("정상 작동",1);
