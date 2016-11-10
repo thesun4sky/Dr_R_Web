@@ -23,12 +23,10 @@ public class AES256CipherTest {
         AES256Cipher a256 = AES256Cipher.getInstance();
         String enPassword = a256.AES_Encode(password);
         return enPassword;
-
     }
     @Test public String desPass() throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException{
         AES256Cipher a256 = AES256Cipher.getInstance();
         String desPassword = a256.AES_Decode(password);
         return desPassword;
-
     }
 }

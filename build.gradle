@@ -33,5 +33,6 @@ dependencies {
 	compile group: 'commons-codec', name: 'commons-codec', version: '1.4'
 	compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1")
 	runtime("mysql:mysql-connector-java")
+	compile ('javax.mail:mail:1.4.7')
 
 }
