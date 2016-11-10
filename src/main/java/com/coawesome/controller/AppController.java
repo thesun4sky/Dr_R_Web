@@ -31,7 +31,7 @@ public class AppController {
     public ResultVO checkUserDevice(HttpServletRequest request) {
         UserVO userVO = new UserVO();
         userVO.setU_device(request.getParameter("u_device"));
-        System.out.println("u_device : " + userVO.getLogin_id());
+        System.out.println("u_device : " + userVO.getU_device());
         String found_device = userMapper.checkUserDevice(userVO);
         if(userVO.getU_device().equals(found_device)){
             System.out.println("device 있음. 자동로그인");
@@ -63,6 +63,26 @@ public class AppController {
         }
     }
 
+    @RequestMapping(value="/login",method = RequestMethod.POST)
+    public ResultVO checkLogin(HttpServletRequest request){
+        String login_id = request.getParameter("login_id");
+        String u_password = request.getParameter("u_password");
+        System.out.println("try login : " + login_id);
+        UserVO userVO = new UserVO();
+        userVO.setLogin_id(login_id);
+        userVO.setU_password(u_password);
+        String found_password = userMapper.userLogincheck(userVO);
+
+        if(u_password.equals(found_password)){
+            System.out.println("login success" + login_id);
+            return new ResultVO(userVO.getLogin_id(),1);
+        }
+        else{
+            System.out.println("login failed" + login_id);
+            return new ResultVO(userVO.getLogin_id(),0);
+        }
+
+    }
     @RequestMapping(value= "/writeDiary",method= RequestMethod.POST)
     public ResultVO writeDiary(HttpServletRequest request) {
         DiaryVO diaryVO = new DiaryVO();
@@ -108,7 +128,7 @@ public class AppController {
         userVO.setU_password(request.getParameter("u_password"));
         userVO.setU_phone(request.getParameter("u_phone"));
         userVO.setU_disease(request.getParameter("u_disease"));
-        userVO.setU_hospital(request.getParameter("u_hospital_name"));
+        userVO.setU_hospital(request.getParameter("u_hospital"));
         userVO.setU_device(request.getParameter("u_device"));
         System.out.println(userVO.toString());
 
