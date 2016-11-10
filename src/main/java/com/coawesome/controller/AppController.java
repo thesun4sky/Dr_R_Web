@@ -39,10 +39,8 @@ public class AppController {
             return new ResultVO(userVO.getU_name(),1);
         }
         else {
-            System.out.println("아이디 없음. 회원가입");
-            userVO.setU_name("김태선");
-            userMapper.addUser(userVO);
-            return new ResultVO("새로오신"+userVO.getU_name(),0);
+            System.out.println("아이디 없음. ");
+            return new ResultVO("회원가입 필요",0);
         }
     }
 
@@ -131,7 +129,7 @@ public class AppController {
         userVO.setU_hospital(request.getParameter("u_hospital"));
         userVO.setU_device(request.getParameter("u_device"));
         System.out.println(userVO.toString());
-
+        userMapper.addUser(userVO);
         return new ResultVO("정상 작동",1);
     }
 }
