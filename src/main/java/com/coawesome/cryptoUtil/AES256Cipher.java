@@ -1,22 +1,19 @@
 package com.coawesome.cryptoUtil;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
+import org.apache.commons.codec.binary.Base64;
+
+import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.InvalidAlgorithmParameterException;
-import org.apache.commons.codec.binary.Base64;
 
 public class AES256Cipher {
 
     private static volatile AES256Cipher INSTANCE;
 
-    final static String secretKey   = "12345678901234567890123456789012"; //32bit
+    final static String secretKey   = "1234567890123456"; //32bit
     static String IV                = ""; //16bit
 
     public static AES256Cipher getInstance(){
