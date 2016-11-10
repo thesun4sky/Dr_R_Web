@@ -50,14 +50,14 @@ public class AppController {
     public ResultVO writeDiary(HttpServletRequest request) {
         DiaryVO diaryVO = new DiaryVO();
         diaryVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
-        diaryVO.setBreakfast(request.getParameter("breakfast"));
-        diaryVO.setLunch(request.getParameter("lunch"));
-        diaryVO.setDinner(request.getParameter("dinner"));
-        diaryVO.setTemperature(Integer.parseInt(request.getParameter("temperature")));
-        diaryVO.setHumid(Integer.parseInt(request.getParameter("humid")));
-        diaryVO.setSleepTime(Integer.parseInt(request.getParameter("sleepTime")));
-        diaryVO.setBloodPressure(Integer.parseInt(request.getParameter("bloodPressure")));
-        diaryVO.setDrinking(request.getParameter("drinking"));
+        diaryVO.setC_breakfast(request.getParameter("breakfast"));
+        diaryVO.setC_lunch(request.getParameter("lunch"));
+        diaryVO.setC_dinner(request.getParameter("dinner"));
+        diaryVO.setC_temperature(Integer.parseInt(request.getParameter("temperature")));
+        diaryVO.setC_humid(Integer.parseInt(request.getParameter("humid")));
+        diaryVO.setC_sleepTime(Integer.parseInt(request.getParameter("sleepTime")));
+        diaryVO.setC_bloodPressure(Integer.parseInt(request.getParameter("bloodPressure")));
+        diaryVO.setC_drinking(request.getParameter("drinking"));
 
         System.out.println("diaryVO : " + diaryVO);
         return new ResultVO(diaryVO.toString(),1);
@@ -69,13 +69,13 @@ public class AppController {
         System.out.println("getDiaries called");
         ArrayList<DiaryVO> arrayList = new ArrayList<DiaryVO>();
         DiaryVO diaryVO = new DiaryVO();
-        diaryVO.setBloodPressure(5);
-        diaryVO.setDinner("aa ss");
-        diaryVO.setLunch("lun chi");
+        diaryVO.setC_bloodPressure(5);
+        diaryVO.setC_dinner("aa ss");
+        diaryVO.setC_dinner("lun chi");
         arrayList.add(diaryVO);
-        diaryVO.setBloodPressure(2);
-        diaryVO.setDinner("aa 1");
-        diaryVO.setLunch("lu5hi");
+        diaryVO.setC_bloodPressure(2);
+        diaryVO.setC_dinner("aa 1");
+        diaryVO.setC_lunch("lu5hi");
         arrayList.add(diaryVO);
         System.out.println(arrayList.toString());
         return diaryVO;
