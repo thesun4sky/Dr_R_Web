@@ -21,7 +21,7 @@ public interface UserMapper {
     String checkUserDevice(UserVO user);
 
     //이름 찾기
-    @Select("select u_name from user where u_name = #{u_name}")
+    @Select("select u_name from user where u_device = #{u_device}")
     String findName(UserVO user);
 
     //비밀번호 찾기
