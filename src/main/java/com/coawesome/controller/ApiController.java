@@ -56,11 +56,11 @@ public class ApiController {
         String ori_pass = doctor.getA_password();
         //암호화
         System.out.println(ori_pass);
-//        AES256CipherTest aes = new AES256CipherTest(ori_pass);
-//        String en_pass = aes.encPass();
+        AES256CipherTest aes = new AES256CipherTest(ori_pass);
+        String en_pass = aes.encPass();
         //암호화한 후 set
-//        doctor.setA_password(en_pass);
-        doctor.setA_password(ori_pass);
+        doctor.setA_password(en_pass);
+//        doctor.setA_password(ori_pass);
         System.out.println(ori_pass);
         doctorMapper.addUser(doctor);
         return "true";
@@ -73,15 +73,16 @@ public class ApiController {
         System.out.println("Login Check : " + doctor.getE_mail());
         String input_pass = doctor.getA_password();
         String password = doctorMapper.doctorLogincheck(doctor);
+        int u_id = doctorMapper.findA_id(doctor);
         System.out.println("패스워드 일치 체크 ");
         //복호화된 패스워드와 일치 확인
         if(password != null) {
-//            AES256CipherTest aes = new AES256CipherTest(password);
-//            String des_pass = aes.desPass();
-            if (input_pass.equals(password)) {
-//            if (input_pass.equals(des_pass)) {
+            AES256CipherTest aes = new AES256CipherTest(password);
+            String des_pass = aes.desPass();
+//            if (input_pass.equals(password)) {
+            if (input_pass.equals(des_pass)) {
                 System.out.println("비밀번호 일치" );
-                return new ResultVO(doctorMapper.findPass(doctor),1);
+                return new ResultVO(doctorMapper.findName(doctor),u_id);
             } else {
                 System.out.println("비밀번호 불일치" );
                 return new ResultVO("비밀번호가 다릅니다",0);
@@ -114,18 +115,6 @@ public class ApiController {
         }
     }
 
-    //다이어리 올리기
-    @RequestMapping(method = RequestMethod.POST, value = "/api/board")
-    public boolean addBoard(@RequestParam("file") MultipartFile file, BoardVO board) throws Exception {
-        //TODO 중복체크
-//        boardMapper.insertBoard(board);
-//        int storedBoardId = boardMapper.selectBoardId(board);
-//        board.setBoard_id(storedBoardId);
-//        System.out.println("board: " + board);
-          ImageVO image = fileUtils.parseInsertFileInfo(file, board);
-//        boardMapper.insertBoardImage(image);
-        return true;
-    }
 
 
     //다이어리 상세보기
@@ -154,10 +143,10 @@ public class ApiController {
     @RequestMapping(method = RequestMethod.POST, value = "api/getPatientList")
     public ArrayList<UserVO> getPatientList(@RequestBody DoctorVO doctorVO) throws Exception {
         //TODO 중복체크
+        System.out.println("doctor : " + doctorVO);
         ArrayList<UserVO> userVOs = doctorMapper.getPatientList(doctorVO);
         System.out.println("patient list of : " + doctorVO.getE_mail());
 
         return userVOs;
     }
-
 }

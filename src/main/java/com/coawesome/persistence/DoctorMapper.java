@@ -22,6 +22,10 @@ public interface DoctorMapper {
     @Select("select a_password from doctor where e_mail = #{e_mail} and a_name = #{a_name}")
     String findPass(DoctorVO doctor);
 
+    //아이디 찾기
+    @Select("select a_id from doctor where e_mail = #{e_mail}")
+    int findA_id(DoctorVO doctorVO);
+
     //회원가입(의사)
     @Insert("INSERT INTO doctor(e_mail, a_name, a_password, a_phone, a_hospital) VALUES(#{e_mail}, #{a_name}, #{a_password}, #{a_phone}, #{a_hospital})")
     void addUser(DoctorVO doctor);
@@ -35,7 +39,9 @@ public interface DoctorMapper {
     String findName(DoctorVO user);
 
     //환자 리스트 찾기
-    @Select("select * from user ")   //임시
+    @Select("select * from d_u \n" +
+            "INNER JOIN user ON user.u_id = d_u.u_id\n" +
+            "WHERE d_u.a_id = #{a_id}; ")   //임시
     ArrayList<UserVO> getPatientList(DoctorVO doctorVO);
 
 
