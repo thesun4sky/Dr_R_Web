@@ -99,7 +99,7 @@ public class AppController {
     }
 
     @RequestMapping(value= "/getDiaries",method= RequestMethod.POST)
-    public String getDiary(HttpServletRequest request) {
+    public ArrayList<DiaryVO> getDiary(HttpServletRequest request) {
         System.out.println("u_id : " + request.getParameter("u_id"));
         System.out.println("getDiaries called");
         ArrayList<DiaryVO> arrayList = new ArrayList<DiaryVO>();
@@ -113,7 +113,7 @@ public class AppController {
         diaryVO.setC_lunch("lu5hi");
         arrayList.add(diaryVO);
         System.out.println(arrayList.toString());
-        return arrayList.toString();
+        return arrayList;
     }
 
     @RequestMapping(value= "/joinUser",method= RequestMethod.POST)
