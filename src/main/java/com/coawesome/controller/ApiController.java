@@ -5,11 +5,14 @@ import com.coawesome.cryptoUtil.AES256CipherTest;
 import com.coawesome.domain.*;
 import com.coawesome.persistence.DiaryMapper;
 import com.coawesome.persistence.DoctorMapper;
+import com.coawesome.persistence.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.print.Doc;
+import java.util.ArrayList;
 
 /**
  * Created by TeasunKim on 2016-11-03.
@@ -19,6 +22,8 @@ public class ApiController {
 
     @Autowired
     private DoctorMapper doctorMapper;
+    @Autowired
+    private UserMapper userMapper;
     @Autowired
     private DiaryMapper diaryMapper;
     @Resource(name = "fileUtils")
@@ -130,6 +135,29 @@ public class ApiController {
         DiaryVO diaryVO = diaryMapper.getDiary(diary);
         System.out.println("diary: " + diaryVO);
         return diaryVO;
+    }
+
+
+    //다이어리 리스트 보기
+    @RequestMapping(method = RequestMethod.POST, value = "diary/getDiaryList")
+    public ArrayList<DiaryVO> getDiaryList(@RequestBody UserVO userVO) throws Exception {
+        //TODO 중복체크
+        ArrayList<DiaryVO> diaryVO = diaryMapper.getDiaryList(userVO);
+        System.out.println("diary list of : " + userVO.getU_id());
+
+
+        return diaryVO;
+    }
+
+
+    //환자 리스트 보기
+    @RequestMapping(method = RequestMethod.POST, value = "api/getPatientList")
+    public ArrayList<UserVO> getPatientList(@RequestBody DoctorVO doctorVO) throws Exception {
+        //TODO 중복체크
+        ArrayList<UserVO> userVOs = doctorMapper.getPatientList(doctorVO);
+        System.out.println("patient list of : " + doctorVO.getE_mail());
+
+        return userVOs;
     }
 
 }
