@@ -4,6 +4,7 @@ import com.coawesome.domain.DiaryVO;
 import com.coawesome.domain.FileUtils;
 import com.coawesome.domain.ResultVO;
 import com.coawesome.domain.UserVO;
+import com.coawesome.persistence.DiaryMapper;
 import com.coawesome.persistence.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 public class AppController {
 
     @Autowired
+    private DiaryMapper diaryMapper;
     private UserMapper userMapper;
 
     @Resource(name = "fileUtils")
@@ -60,6 +62,19 @@ public class AppController {
             return new ResultVO(userVO.getLogin_id(),0);
         }
     }
+
+    @RequestMapping(value= "/findUserId",method= RequestMethod.POST)
+    public ResultVO findUserId(HttpServletRequest request) {
+        String device = request.getParameter("u_device");
+        System.out.println("device check : " + device);
+        UserVO userVO = new UserVO();
+        userVO.setU_device(device);
+        int found_userId = userMapper.findUserId(userVO);
+
+        return new ResultVO("정상 작동",found_userId);
+    }
+
+
 
     @RequestMapping(value="/login",method = RequestMethod.POST)
     public ResultVO checkLogin(HttpServletRequest request){

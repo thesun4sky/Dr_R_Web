@@ -16,6 +16,10 @@ public interface UserMapper {
     @Select("select login_id from user where login_id = #{login_id}")
     String checkUserLoginId(UserVO user);
 
+    //디바이스로 부터 u_id찾기
+    @Select("select u_id from user where u_device = #{u_device}")
+    int findUserId(UserVO user);
+
     //device 체크
     @Select("select u_device from user where u_device = #{u_device}")
     String checkUserDevice(UserVO user);
