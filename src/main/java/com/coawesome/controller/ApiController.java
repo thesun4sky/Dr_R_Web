@@ -149,4 +149,16 @@ public class ApiController {
 
         return userVOs;
     }
+
+
+    //전체 환자 리스트 보기
+    @RequestMapping(method = RequestMethod.POST, value = "api/getAllPatientList")
+    public ArrayList<UserVO> getAllPatientList(@RequestBody DoctorVO doctorVO) throws Exception {
+        //TODO 중복체크
+        System.out.println("doctor : " + doctorVO);
+        ArrayList<UserVO> userVOs = doctorMapper.getAllPatientList(doctorVO);
+        System.out.println("patient list of : " + doctorVO.getE_mail());
+
+        return userVOs;
+    }
 }

@@ -7,6 +7,7 @@ import com.coawesome.domain.UserVO;
 import com.coawesome.persistence.DiaryMapper;
 import com.coawesome.persistence.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -117,21 +118,14 @@ public class AppController {
 
     @RequestMapping(value= "/getDiaries",method= RequestMethod.POST)
     public ArrayList<DiaryVO> getDiary(HttpServletRequest request) {
-        System.out.println("u_id : " + request.getParameter("u_id"));
-        System.out.println("getDiaries called");
-        ArrayList<DiaryVO> arrayList = new ArrayList<DiaryVO>();
-        DiaryVO diaryVO = new DiaryVO();
-        diaryVO.setC_bloodPressure(5);
-        diaryVO.setC_dinner("aa ss");
-        diaryVO.setC_dinner("lun chi");
-        arrayList.add(diaryVO);
-        diaryVO.setC_bloodPressure(2);
-        diaryVO.setC_dinner("aa 1");
-        diaryVO.setC_lunch("lu5hi");
-        arrayList.add(diaryVO);
-        System.out.println(arrayList.toString());
-        return arrayList;
+        //TODO 중복체크
+        UserVO userVO = new UserVO();
+        userVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
+        ArrayList<DiaryVO> diaryVOs = diaryMapper.getDiaryList(userVO);
+
+        return diaryVOs;
     }
+
 
     @RequestMapping(value= "/joinUser",method= RequestMethod.POST)
     public ResultVO joinUser(HttpServletRequest request) {
