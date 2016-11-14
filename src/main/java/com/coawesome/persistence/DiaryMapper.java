@@ -18,6 +18,12 @@ public interface DiaryMapper {
     @Select("select * from check_list where list_id = #{list_id}")
     DiaryVO getDiary(DiaryVO diaryVO);
 
+    //다이어리 쓰기
+    @Insert("INSERT INTO user(u_id, c_temperature, c_humid, c_sleepTime, c_drinking, c_bloodPressure, c_memo, c_breakfast, c_lunch, c_dinner)" +
+            " VALUES(#{u_id}, #{c_temperature}, #{c_humid}, #{c_sleepTime}, #{c_drinking}, #{c_bloodPressure}, #{c_memo}, #{c_breakfast}, #{c_lunch}, #{c_dinner})")
+    void addDiary(DiaryVO diaryVO);
+
+
     //다이어리 리스트 보기
     @Select("select * from check_list INNER JOIN user ON user.u_id = check_list.u_id where check_list.u_id = #{u_id} ORDER BY c_date DESC")
     ArrayList<DiaryVO> getDiaryList(UserVO userVO);

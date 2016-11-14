@@ -23,6 +23,8 @@ public class AppController {
 
     @Autowired
     private DiaryMapper diaryMapper;
+
+    @Autowired
     private UserMapper userMapper;
 
     @Resource(name = "fileUtils")
@@ -108,7 +110,7 @@ public class AppController {
         diaryVO.setC_sleepTime(Integer.parseInt(request.getParameter("sleepTime")));
         diaryVO.setC_bloodPressure(Integer.parseInt(request.getParameter("bloodPressure")));
         diaryVO.setC_drinking(request.getParameter("drinking"));
-
+        diaryMapper.addDiary(diaryVO);
         System.out.println("diaryVO : " + diaryVO);
         return new ResultVO("정상 작동",1);
     }
