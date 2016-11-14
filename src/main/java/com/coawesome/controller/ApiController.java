@@ -56,11 +56,11 @@ public class ApiController {
         String ori_pass = doctor.getA_password();
         //암호화
         System.out.println(ori_pass);
-        AES256CipherTest aes = new AES256CipherTest(ori_pass);
-        String en_pass = aes.encPass();
+//        AES256CipherTest aes = new AES256CipherTest(ori_pass);
+//        String en_pass = aes.encPass();
         //암호화한 후 set
-        doctor.setA_password(en_pass);
-//        doctor.setA_password(ori_pass);
+//        doctor.setA_password(en_pass);
+        doctor.setA_password(ori_pass);
         System.out.println(ori_pass);
         doctorMapper.addUser(doctor);
         return "true";
@@ -76,12 +76,12 @@ public class ApiController {
         System.out.println("패스워드 일치 체크 ");
         //복호화된 패스워드와 일치 확인
         if(password != null) {
-            AES256CipherTest aes = new AES256CipherTest(password);
-            String des_pass = aes.desPass();
-//            if (input_pass.equals(password)) {
-            if (input_pass.equals(des_pass)) {
+//            AES256CipherTest aes = new AES256CipherTest(password);
+//            String des_pass = aes.desPass();
+            if (input_pass.equals(password)) {
+//            if (input_pass.equals(des_pass)) {
                 System.out.println("비밀번호 일치" );
-                return new ResultVO(doctorMapper.findName(doctor),1);
+                return new ResultVO(doctorMapper.findPass(doctor),1);
             } else {
                 System.out.println("비밀번호 불일치" );
                 return new ResultVO("비밀번호가 다릅니다",0);

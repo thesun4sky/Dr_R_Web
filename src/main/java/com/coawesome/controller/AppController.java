@@ -95,7 +95,7 @@ public class AppController {
         diaryVO.setC_drinking(request.getParameter("drinking"));
 
         System.out.println("diaryVO : " + diaryVO);
-        return new ResultVO(diaryVO.toString(),1);
+        return new ResultVO("정상 작동",1);
     }
 
     @RequestMapping(value= "/getDiaries",method= RequestMethod.POST)
