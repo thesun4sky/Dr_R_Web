@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.ArrayList;
+
 /**
  * Created by TeasunKim on 2016-11-03.
  */
@@ -31,6 +33,10 @@ public interface DoctorMapper {
     //이름 찾기
     @Select("select a_name from doctor where e_mail = #{e_mail}")
     String findName(DoctorVO user);
+
+    //환자 리스트 찾기
+    @Select("select * from user ")   //임시
+    ArrayList<UserVO> getPatientList(DoctorVO doctorVO);
 
 
 }

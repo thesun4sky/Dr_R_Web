@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 public class DiaryVO {
     private int list_id;
     private int u_id;
+    private String u_name;
+    private String u_disease;
     private String c_breakfast;
     private String c_lunch;
     private String c_dinner;
@@ -22,4 +24,5 @@ public class DiaryVO {
     private int c_bloodPressure;
     private String c_drinking;
     private String c_memo;
+    private String c_date;
 }
