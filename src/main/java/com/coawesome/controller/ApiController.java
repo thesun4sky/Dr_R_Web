@@ -76,7 +76,7 @@ public class ApiController {
 //            if (input_pass.equals(password)) {
             if (input_pass.equals(des_pass)) {
                 System.out.println("비밀번호 일치" );
-                return new ResultVO(doctorMapper.findPass(doctor),1);
+                return new ResultVO(doctorMapper.findName(doctor),1);
             } else {
                 System.out.println("비밀번호 불일치" );
                 return new ResultVO("비밀번호가 다릅니다",0);

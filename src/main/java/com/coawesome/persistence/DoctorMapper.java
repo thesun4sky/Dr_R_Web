@@ -1,6 +1,7 @@
 package com.coawesome.persistence;
 
 import com.coawesome.domain.DoctorVO;
+import com.coawesome.domain.UserVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -26,5 +27,10 @@ public interface DoctorMapper {
     //로그인
     @Select("select a_password from doctor where e_mail = #{e_mail}")
     String doctorLogincheck(DoctorVO doctor);
+
+    //이름 찾기
+    @Select("select a_name from doctor where e_mail = #{e_mail}")
+    String findName(DoctorVO user);
+
 
 }

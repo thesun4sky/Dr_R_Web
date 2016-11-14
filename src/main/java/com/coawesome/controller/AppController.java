@@ -53,7 +53,7 @@ public class AppController {
         String found_id = userMapper.checkUserLoginId(userVO);
         if(userVO.getLogin_id().equals(found_id)){
             //System.out.println("아이디 있음. 사용 불가");
-            return new ResultVO("",1);
+            return new ResultVO("아이디가 중복됩니다.",1);
         }
         else {
             //System.out.println("아이디 없음. 사용 가능");
