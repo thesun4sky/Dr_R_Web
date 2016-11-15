@@ -139,13 +139,25 @@ public class ApiController {
     }
 
 
+
+    //다이어리 전체 리스트 보기
+    @RequestMapping(method = RequestMethod.POST, value = "diary/allDiaryListPost")
+    public ArrayList<DiaryVO> allDiaryListPost(@RequestBody DoctorVO doctorVO) throws Exception {
+        //TODO 중복체크
+        System.out.println("all diary list of : " + doctorVO.getA_id());
+        ArrayList<DiaryVO> diaryVO = diaryMapper.getAllDiaryList(doctorVO);
+        System.out.println("result : " + diaryVO);
+        return diaryVO;
+    }
+
+
     //환자 리스트 보기
     @RequestMapping(method = RequestMethod.POST, value = "api/getPatientList")
     public ArrayList<UserVO> getPatientList(@RequestBody DoctorVO doctorVO) throws Exception {
         //TODO 중복체크
         System.out.println("doctor : " + doctorVO);
         ArrayList<UserVO> userVOs = doctorMapper.getPatientList(doctorVO);
-        System.out.println("patient list of : " + doctorVO.getE_mail());
+        System.out.println("patient list of : " + doctorVO.getA_name());
 
         return userVOs;
     }
@@ -157,7 +169,7 @@ public class ApiController {
         //TODO 중복체크
         System.out.println("doctor : " + doctorVO);
         ArrayList<UserVO> userVOs = doctorMapper.getAllPatientList(doctorVO);
-        System.out.println("patient list of : " + doctorVO.getE_mail());
+        System.out.println("patient list of : " + userVOs);
 
         return userVOs;
     }
