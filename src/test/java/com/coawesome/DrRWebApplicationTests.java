@@ -10,7 +10,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class DrRWebApplicationTests {
 
 	@Test
-	public void contextLoads() {
+	public void stringBufferTest() {
+		StringBuffer stringBuffer = new StringBuffer();
+		stringBuffer.append("apple");
+		System.out.println(stringBuffer.reverse());
+		stringBuffer.append("<-> apple");
+		System.out.println(stringBuffer);
 	}
 
 }

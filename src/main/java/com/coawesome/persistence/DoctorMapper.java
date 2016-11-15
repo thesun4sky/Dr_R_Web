@@ -5,6 +5,7 @@ import com.coawesome.domain.UserVO;
 import org.apache.ibatis.annotations.*;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by TeasunKim on 2016-11-03.
@@ -18,7 +19,7 @@ public interface DoctorMapper {
 
     //병원이름 가져오기
     @Select("select DISTINCT a_hospital from doctor")
-    ArrayList<String> getHospital();
+    ArrayList<Map> getHospital();
 
     //비밀번호 찾기
     @Select("select a_password from doctor where e_mail = #{e_mail} and a_name = #{a_name}")

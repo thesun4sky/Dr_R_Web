@@ -1,11 +1,13 @@
 package com.coawesome.controller;
 
-import com.coawesome.domain.*;
+import com.coawesome.domain.DiaryVO;
+import com.coawesome.domain.FileUtils;
+import com.coawesome.domain.ResultVO;
+import com.coawesome.domain.UserVO;
 import com.coawesome.persistence.DiaryMapper;
 import com.coawesome.persistence.DoctorMapper;
 import com.coawesome.persistence.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by TeasunKim on 2016-11-09.
@@ -78,8 +81,8 @@ public class AppController {
     }
 
     @RequestMapping(value = "/getHospital",method = RequestMethod.GET)
-    public ArrayList<String> getHospital(){
-        ArrayList<String> array = doctorMapper.getHospital();
+    public ArrayList<Map> getHospital(){
+        ArrayList<Map> array = doctorMapper.getHospital();
 
         return array;
     }
