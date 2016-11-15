@@ -21,6 +21,10 @@ public interface DoctorMapper {
     @Select("select DISTINCT a_hospital from doctor")
     ArrayList<Map> getHospital();
 
+    //병원이름 가져오기
+    @Select("select doctor.a_phone from doctor INNER JOIN d_u ON d_u.a_id = doctor.a_id WHERE d_u.u_id = #{u_id}")
+    String getDocPhone(UserVO userVO);
+
     //비밀번호 찾기
     @Select("select a_password from doctor where e_mail = #{e_mail} and a_name = #{a_name}")
     String findPass(DoctorVO doctor);
