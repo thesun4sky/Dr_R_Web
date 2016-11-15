@@ -1,10 +1,8 @@
 package com.coawesome.controller;
 
-import com.coawesome.domain.DiaryVO;
-import com.coawesome.domain.FileUtils;
-import com.coawesome.domain.ResultVO;
-import com.coawesome.domain.UserVO;
+import com.coawesome.domain.*;
 import com.coawesome.persistence.DiaryMapper;
+import com.coawesome.persistence.DoctorMapper;
 import com.coawesome.persistence.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +25,8 @@ public class AppController {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private DoctorMapper doctorMapper;
 
     @Resource(name = "fileUtils")
     private FileUtils fileUtils;
@@ -77,6 +77,12 @@ public class AppController {
         return new ResultVO("정상 작동",found_userId);
     }
 
+    @RequestMapping(value = "/getHospital",method = RequestMethod.GET)
+    public ArrayList<String> getHospital(){
+        ArrayList<String> array = doctorMapper.getHospital();
+
+        return array;
+    }
 
 
     @RequestMapping(value="/login",method = RequestMethod.POST)
