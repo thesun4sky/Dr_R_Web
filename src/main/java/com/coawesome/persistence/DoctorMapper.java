@@ -2,9 +2,7 @@ package com.coawesome.persistence;
 
 import com.coawesome.domain.DoctorVO;
 import com.coawesome.domain.UserVO;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.ArrayList;
 
@@ -48,7 +46,21 @@ public interface DoctorMapper {
             "WHERE d_u.a_id = #{a_id}; ")
     ArrayList<UserVO> getPatientList(DoctorVO doctorVO);
 
-    //전체 환자 리스트 찾기
-    @Select("select * from user ")   //임시
+    //의사 병원 환자 리스트 찾기
+    @Select("select * from (\n" +
+            "select DISTINCT user.* from user INNER JOIN doctor ON doctor.a_hospital = user.u_hospital WHERE a_id=#{a_id} " +
+            ") as user LEFT OUTER JOIN (select * FROM d_u WHERE a_id=#{a_id}) as d_u ON d_u.u_id = user.u_id")
     ArrayList<UserVO> getAllPatientList(DoctorVO doctorVO);
+
+    //의사 병원이름 가져오기
+    @Select("select a_hospital from doctor WHERE a_id = #{a_id}")
+    String getdoctorHospital(DoctorVO doctorVO);
+
+    //환자 등록
+    @Insert("INSERT INTO d_u(a_id, u_id) VALUES(#{a_id}, #{u_id})")
+    void addPatient(UserVO userVO);
+
+    //환자 등록 취소
+    @Delete("DELETE FROM d_u WHERE a_id = #{a_id} AND u_id = #{u_id}")
+    void delPatient(UserVO userVO);
 }

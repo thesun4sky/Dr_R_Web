@@ -173,4 +173,34 @@ public class ApiController {
 
         return userVOs;
     }
+
+
+    //의사 병원이름 보기
+    @RequestMapping(method = RequestMethod.POST, value = "api/getdoctorHospital")
+    public ResultVO getdoctorHospital(@RequestBody DoctorVO doctorVO) throws Exception {
+        return new ResultVO(doctorMapper.getdoctorHospital(doctorVO),0);
+    }
+
+
+    //환자 등록
+    @RequestMapping(method = RequestMethod.POST, value = "api/addPatient")
+    public ResultVO addPatient(@RequestBody UserVO userVO) throws Exception {
+        //TODO 중복체크
+        System.out.println("doctor : " + userVO.getA_id());
+        doctorMapper.addPatient(userVO);
+        System.out.println("add patient of id : " + userVO.getU_id());
+
+        return new ResultVO("success",0);
+    }
+
+    //환자 등록 취소
+    @RequestMapping(method = RequestMethod.POST, value = "api/delPatient")
+    public ResultVO delPatient(@RequestBody UserVO userVO) throws Exception {
+        //TODO 중복체크
+        System.out.println("doctor : " + userVO.getA_id());
+        doctorMapper.delPatient(userVO);
+        System.out.println("del patient of id : " + userVO.getU_id());
+
+        return new ResultVO("success",0);
+    }
 }

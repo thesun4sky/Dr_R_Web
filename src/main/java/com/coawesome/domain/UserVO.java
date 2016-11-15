@@ -19,4 +19,5 @@ public class UserVO {
     private String u_disease;
     private String u_hospital;
     private String u_device;
+    private int a_id;
 }
