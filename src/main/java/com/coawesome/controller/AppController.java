@@ -154,11 +154,10 @@ public class AppController {
     }
 
     @RequestMapping(value= "/getDocPhone",method= RequestMethod.POST)
-    public ResultVO getPhoneNum(HttpServletRequest request) {
+    public Map getPhoneNum(HttpServletRequest request) {
         System.out.println("getPhoneNum called by " + request.getParameter("u_id"));
         UserVO userVO = new UserVO();
         userVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
-        doctorMapper.getDocPhone(userVO);
-        return new ResultVO("정상 작동",1);
+        return doctorMapper.getDocPhone(userVO);
     }
 }
