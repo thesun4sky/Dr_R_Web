@@ -1,11 +1,9 @@
 package com.coawesome.controller;
 
-import com.coawesome.domain.DiaryVO;
-import com.coawesome.domain.FileUtils;
-import com.coawesome.domain.ResultVO;
-import com.coawesome.domain.UserVO;
+import com.coawesome.domain.*;
 import com.coawesome.persistence.DiaryMapper;
 import com.coawesome.persistence.DoctorMapper;
+import com.coawesome.persistence.QnaMapper;
 import com.coawesome.persistence.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +28,8 @@ public class AppController {
     private UserMapper userMapper;
     @Autowired
     private DoctorMapper doctorMapper;
+    @Autowired
+    private QnaMapper qnaMapper;
 
     @Resource(name = "fileUtils")
     private FileUtils fileUtils;
@@ -133,6 +133,25 @@ public class AppController {
         ArrayList<DiaryVO> diaryVOs = diaryMapper.getDiaryList(userVO);
 
         return diaryVOs;
+    }
+
+
+    @RequestMapping(value= "/getQnaList",method= RequestMethod.GET)
+    public ArrayList<QnaVO> getQnaList(HttpServletRequest request) {
+        return qnaMapper.getQnaList();
+    }
+
+    @RequestMapping(value= "/makeQuestion",method= RequestMethod.POST)
+    public ResultVO makeQuestion(HttpServletRequest request) {
+        QnaVO qnaVO = new QnaVO();
+        qnaVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
+        qnaVO.setU_name(request.getParameter("u_name"));
+        qnaVO.setQna_title(request.getParameter("qna_title"));
+        qnaVO.setQna_content(request.getParameter("qna_content"));
+        //date, count 는 sql에서 생성
+        qnaMapper.makeQuestion(qnaVO);
+
+        return new ResultVO("정상 작동",1);
     }
 
 
