@@ -98,13 +98,16 @@ public class AppController {
         userVO.setU_password(u_password);
         String found_password = userMapper.userLogincheck(userVO);
 
+        String u_name = userMapper.findNameById(userVO).getU_name();
+        int u_id = userMapper.findNameById(userVO).getU_id();
+
         if(u_password.equals(found_password)){
-            System.out.println("login success" + login_id);
-            return new ResultVO(userVO.getLogin_id(),1);
+            System.out.println("login success" + u_name);
+            return new ResultVO(u_name,u_id);
         }
         else{
-            System.out.println("login failed" + login_id);
-            return new ResultVO(userVO.getLogin_id(),0);
+            System.out.println("login   failed" + u_name);
+            return new ResultVO(u_name,-1);
         }
 
     }

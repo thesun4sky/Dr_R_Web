@@ -24,9 +24,13 @@ public interface UserMapper {
     @Select("select u_device from user where u_device = #{u_device}")
     String checkUserDevice(UserVO user);
 
-    //이름 찾기
+    //deviceID로 이름 찾기
     @Select("select u_name from user where u_device = #{u_device}")
     String findName(UserVO user);
+
+    //login_id로 이름 찾기
+    @Select("select u_id, u_name from user where login_id = #{login_id}")
+    UserVO findNameById(UserVO user);
 
     //비밀번호 찾기
     @Select("select u_password from user where login_id = #{login_id} and u_name = #{u_name}")
