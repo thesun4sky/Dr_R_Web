@@ -40,8 +40,9 @@ public class AppController {
         UserVO userVO = new UserVO();
         userVO.setU_device(request.getParameter("u_device"));
         System.out.println("u_device : " + userVO.getU_device());
-        String found_device = userMapper.checkUserDevice(userVO);
-        if(userVO.getU_device().equals(found_device)){
+        int found_device = userMapper.checkUserDevice(userVO);
+//        if(userVO.getU_device().equals(found_device)){
+        if(found_device > 0){
             System.out.println("device 있음. 자동로그인");
             userVO.setU_name(userMapper.findName(userVO).getU_name());
             userVO.setU_id(userMapper.findName(userVO).getU_id());
@@ -59,8 +60,9 @@ public class AppController {
         System.out.println("Login_id check : " + login_id);
         UserVO userVO = new UserVO();
         userVO.setLogin_id(login_id);
-        String found_id = userMapper.checkUserLoginId(userVO);
-        if(userVO.getLogin_id().equals(found_id)){
+        int found_id = userMapper.checkUserLoginId(userVO);
+//        if(userVO.getLogin_id().equals(found_id)){
+        if(found_id > 0){
             //System.out.println("아이디 있음. 사용 불가");
             return new ResultVO("아이디가 중복됩니다.",1);
         }
@@ -97,6 +99,11 @@ public class AppController {
         UserVO userVO = new UserVO();
         userVO.setLogin_id(login_id);
         userVO.setU_password(u_password);
+        int found_id = userMapper.checkUserLoginId(userVO);
+        if (!(found_id > 0)) {
+            System.out.println("login   failed");
+            return new ResultVO("",-1);
+        }
         String found_password = userMapper.userLogincheck(userVO);
 
         String u_name = userMapper.findNameById(userVO).getU_name();
@@ -107,8 +114,8 @@ public class AppController {
             return new ResultVO(u_name,u_id);
         }
         else{
-            System.out.println("login   failed" + u_name);
-            return new ResultVO(u_name,-1);
+            System.out.println("login   failed" + "");
+            return new ResultVO("",-1);
         }
 
     }
