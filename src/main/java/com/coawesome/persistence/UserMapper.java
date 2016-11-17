@@ -14,8 +14,8 @@ public interface UserMapper {
 
 
     //로그인 아이디 체크
-    @Select("select login_id from user where login_id = #{login_id}")
-    String checkUserLoginId(UserVO user);
+    @Select("select count(*) from user where login_id = #{login_id}")
+    int checkUserLoginId(UserVO user);
 
     //디바이스로 부터 u_id찾기
     @Select("select u_id from user where u_device = #{u_device}")
@@ -26,8 +26,8 @@ public interface UserMapper {
     int findUserU_id(DiaryVO diaryVO);
 
     //device 체크
-    @Select("select u_device from user where u_device = #{u_device}")
-    String checkUserDevice(UserVO user);
+    @Select("select count(*) from user where u_device = #{u_device}")
+    int checkUserDevice(UserVO user);
 
     //deviceID로 이름 찾기
     @Select("select u_id, u_name from user where u_device = #{u_device}")
