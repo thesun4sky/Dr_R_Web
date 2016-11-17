@@ -1,5 +1,6 @@
 package com.coawesome.persistence;
 
+import com.coawesome.domain.DiaryVO;
 import com.coawesome.domain.UserVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -19,6 +20,10 @@ public interface UserMapper {
     //디바이스로 부터 u_id찾기
     @Select("select u_id from user where u_device = #{u_device}")
     int findUserId(UserVO user);
+
+    //디바이스로 부터 u_id 조회
+    @Select("select COUNT(*) from user where u_id = #{u_id}")
+    int findUserU_id(DiaryVO diaryVO);
 
     //device 체크
     @Select("select u_device from user where u_device = #{u_device}")

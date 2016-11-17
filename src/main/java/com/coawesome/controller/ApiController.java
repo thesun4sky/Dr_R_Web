@@ -18,6 +18,7 @@ import java.util.ArrayList;
  * Created by TeasunKim on 2016-11-03.
  */
 @RestController
+@RequestMapping(value = "/web")
 public class ApiController {
 
     @Autowired

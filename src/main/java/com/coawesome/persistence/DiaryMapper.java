@@ -6,6 +6,7 @@ import com.coawesome.domain.UserVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.ArrayList;
 
@@ -37,4 +38,20 @@ public interface DiaryMapper {
             "   WHERE d_u.a_id = #{a_id} " +
             "   ORDER BY check_list.c_date DESC")
     ArrayList<DiaryVO> getAllDiaryList(DoctorVO doctorVO);
+
+
+    //다이어리 존재확인 API
+    @Select("select COUNT(*) from check_list where u_id = #{u_id} AND (to_days(now())-to_days(c_date) <= -1 ) AND (to_days(now())-to_days(c_date) > 0 )")
+    int getPatientValue(DiaryVO diaryVO);
+
+    //다이어리 입력 API
+    @Update("update check_list SET c_temperature = #{c_temperature}, c_humid = #{c_humid} " +
+            "WHERE u_id = #{u_id} AND (to_days(now())-to_days(c_date) <= -1 ) AND (to_days(now())-to_days(c_date) > 0 )")
+    void setPatientValue(DiaryVO diaryVO);
+
+    //지정날짜 다이어리 입력 API
+    @Update("update check_list SET c_temperature = #{c_temperature}, c_humid = #{c_humid} " +
+            "WHERE u_id = #{u_id} AND (to_days(#{c_date})-to_days(c_date) <= -1 ) AND (to_days(#{c_date})-to_days(c_date) > 0 )")
+    void setPatientValueWithDate(DiaryVO diaryVO);
+
 }

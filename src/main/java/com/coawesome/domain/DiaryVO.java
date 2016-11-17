@@ -24,5 +24,5 @@ public class DiaryVO {
     private int c_bloodPressure;
     private String c_drinking;
     private String c_memo;
-    private String c_date;
+    private String c_date = null;
 }
