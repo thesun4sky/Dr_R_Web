@@ -25,8 +25,8 @@ public interface UserMapper {
     String checkUserDevice(UserVO user);
 
     //deviceID로 이름 찾기
-    @Select("select u_name from user where u_device = #{u_device}")
-    String findName(UserVO user);
+    @Select("select u_id, u_name from user where u_device = #{u_device}")
+    UserVO findName(UserVO user);
 
     //login_id로 이름 찾기
     @Select("select u_id, u_name from user where login_id = #{login_id}")

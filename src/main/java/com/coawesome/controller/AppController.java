@@ -43,8 +43,9 @@ public class AppController {
         String found_device = userMapper.checkUserDevice(userVO);
         if(userVO.getU_device().equals(found_device)){
             System.out.println("device 있음. 자동로그인");
-            userVO.setU_name(userMapper.findName(userVO));
-            return new ResultVO(userVO.getU_name(),1);
+            userVO.setU_name(userMapper.findName(userVO).getU_name());
+            userVO.setU_id(userMapper.findName(userVO).getU_id());
+            return new ResultVO(userVO.getU_name(),userVO.getU_id());
         }
         else {
             System.out.println("아이디 없음. ");
@@ -65,7 +66,7 @@ public class AppController {
         }
         else {
             //System.out.println("아이디 없음. 사용 가능");
-            return new ResultVO(userVO.getLogin_id(),0);
+            return new ResultVO("사용가능한 아이디 입니다.",0);
         }
     }
 
