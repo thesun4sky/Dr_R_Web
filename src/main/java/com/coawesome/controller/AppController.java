@@ -50,7 +50,7 @@ public class AppController {
         }
         else {
             System.out.println("아이디 없음. ");
-            return new ResultVO("회원가입 필요",0);
+            return new ResultVO("회원가입 필요",-1);
         }
     }
 
@@ -64,7 +64,7 @@ public class AppController {
 //        if(userVO.getLogin_id().equals(found_id)){
         if(found_id > 0){
             //System.out.println("아이디 있음. 사용 불가");
-            return new ResultVO("아이디가 중복됩니다.",1);
+            return new ResultVO("아이디가 중복됩니다.",-1);
         }
         else {
             //System.out.println("아이디 없음. 사용 가능");
@@ -111,7 +111,7 @@ public class AppController {
 
         if(u_password.equals(found_password)){
             System.out.println("login success" + u_name);
-            return new ResultVO(u_name,u_id);
+            return new ResultVO(u_name, u_id);
         }
         else{
             System.out.println("login   failed" + "");
