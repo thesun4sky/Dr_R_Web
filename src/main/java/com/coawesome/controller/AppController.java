@@ -157,8 +157,7 @@ public class AppController {
         QnaVO qnaVO = new QnaVO();
         qnaVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
         qnaVO.setU_name(request.getParameter("u_name"));
-        qnaVO.setQna_title(request.getParameter("qna_title"));
-        qnaVO.setQna_content(request.getParameter("qna_content"));
+        qnaVO.setQna_question(request.getParameter("qna_content"));
         //date, count 는 sql에서 생성
         qnaMapper.makeQuestion(qnaVO);
 

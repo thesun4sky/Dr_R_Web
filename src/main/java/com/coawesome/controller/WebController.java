@@ -5,6 +5,7 @@ import com.coawesome.cryptoUtil.AES256CipherTest;
 import com.coawesome.domain.*;
 import com.coawesome.persistence.DiaryMapper;
 import com.coawesome.persistence.DoctorMapper;
+import com.coawesome.persistence.QnaMapper;
 import com.coawesome.persistence.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
  */
 @RestController
 @RequestMapping(value = "/web")
-public class ApiController {
+public class WebController {
 
     @Autowired
     private DoctorMapper doctorMapper;
@@ -27,6 +28,8 @@ public class ApiController {
     private UserMapper userMapper;
     @Autowired
     private DiaryMapper diaryMapper;
+    @Autowired
+    private QnaMapper qnaMapper;
     @Resource(name = "fileUtils")
     private FileUtils fileUtils;
 
@@ -203,5 +206,26 @@ public class ApiController {
         System.out.println("del patient of id : " + userVO.getU_id());
 
         return new ResultVO("success",0);
+    }
+
+
+    //qna 전체 리스트 보기
+    @RequestMapping(method = RequestMethod.POST, value = "qna/QnaListPost")
+    public ArrayList<QnaVO> QnaListPost(@RequestBody DoctorVO doctorVO) throws Exception {
+        //TODO 중복체크
+        System.out.println("all qna list of : " + doctorVO.getA_id());
+        ArrayList<QnaVO> qnaVOs = qnaMapper.getQnaList();
+        System.out.println("result : " + qnaVOs);
+        return qnaVOs;
+    }
+
+
+    //qna 답변 등록
+    @RequestMapping(method = RequestMethod.POST, value = "qna/answerQna")
+    public ResultVO answerQna(@RequestBody QnaVO qnaVO) throws Exception {
+        //TODO 중복체크
+        System.out.println("answer qna of : " + qnaVO.getA_id());
+        qnaMapper.answerQna(qnaVO);
+        return new ResultVO("success",1);
     }
 }

@@ -13,10 +13,13 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class QnaVO {
+    private int qna_id;
     private int u_id;
+    private int a_id;
     private String u_name;
-    private String qna_title;
-    private String qna_content;
-    private Date date;
+    private String u_disease;
+    private String qna_question;
+    private String qna_answer;
+    private String date;
     private int count;
 }
