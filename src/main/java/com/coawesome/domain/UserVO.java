@@ -14,10 +14,14 @@ public class UserVO {
     private int u_id;
     private String login_id;
     private String u_password;
-    private String u_name;
-    private String u_phone;
-    private String u_disease;
-    private String u_hospital;
     private String u_device;
-    private int a_id;
+    private String u_name;
+    private int u_a_week;
+    private int u_a_date;
+    private int u_b_month;
+    private int u_b_date;
+    private int u_sex;
+    private int u_w;
+    private int u_h;
+    private int p_id;
 }

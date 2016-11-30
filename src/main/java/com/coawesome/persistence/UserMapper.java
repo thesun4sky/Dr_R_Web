@@ -42,7 +42,7 @@ public interface UserMapper {
     String findPass(UserVO user);
 
     //회원가입
-    @Insert("INSERT INTO user(login_id, u_password, u_name, u_phone, u_disease, u_hospital, u_device) VALUES(#{login_id}, #{u_password}, #{u_name}, #{u_phone}, #{u_disease}, #{u_hospital}, #{u_device})")
+    @Insert("INSERT INTO user(login_id, u_password, u_name, u_device, u_a_week, u_a_date, u_b_month, u_b_date, u_sex, u_w, u_h) VALUES(#{login_id}, #{u_password}, #{u_name}, #{u_device}, #{u_a_week}, #{u_a_date}, #{u_b_month}, #{u_b_date}, #{u_sex}, #{u_w}, #{u_h})")
     void addUser(UserVO user);
 
     //로그인

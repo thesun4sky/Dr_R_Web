@@ -173,10 +173,15 @@ public class AppController {
         userVO.setLogin_id(request.getParameter("login_id"));
         userVO.setU_name(request.getParameter("u_name"));
         userVO.setU_password(request.getParameter("u_password"));
-        userVO.setU_phone(request.getParameter("u_phone"));
-        userVO.setU_disease(request.getParameter("u_disease"));
-        userVO.setU_hospital(request.getParameter("u_hospital"));
         userVO.setU_device(request.getParameter("u_device"));
+        userVO.setU_a_week(Integer.parseInt(request.getParameter("u_a_week")));
+        userVO.setU_a_date(Integer.parseInt(request.getParameter("u_a_date")));
+        userVO.setU_b_month(Integer.parseInt(request.getParameter("u_b_month")));
+        userVO.setU_b_date(Integer.parseInt(request.getParameter("u_b_date")));
+        userVO.setU_sex(Integer.parseInt(request.getParameter("u_sex")));
+        userVO.setU_w(Integer.parseInt(request.getParameter("u_w")));
+        userVO.setU_h(Integer.parseInt(request.getParameter("u_h")));
+        //TODO 이미지 추가    p_id
         System.out.println(userVO.toString());
         userMapper.addUser(userVO);
         return new ResultVO("정상 작동",1);

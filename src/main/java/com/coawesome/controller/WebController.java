@@ -185,7 +185,7 @@ public class WebController {
         return new ResultVO(doctorMapper.getdoctorHospital(doctorVO),0);
     }
 
-
+/*
     //환자 등록
     @RequestMapping(method = RequestMethod.POST, value = "api/addPatient")
     public ResultVO addPatient(@RequestBody UserVO userVO) throws Exception {
@@ -206,7 +206,7 @@ public class WebController {
         System.out.println("del patient of id : " + userVO.getU_id());
 
         return new ResultVO("success",0);
-    }
+    }*/
 
 
     //qna 전체 리스트 보기

@@ -1,6 +1,6 @@
 datasource:
   driver-class-name: "com.mysql.jdbc.Driver"
-  url: "jdbc:mysql://52.41.218.18:3306/doctorR?useUnicode=true&charaterEncoding=utf-8"
+  url: "jdbc:mysql://52.41.218.18:3306/Dr_R?useUnicode=true&charaterEncoding=utf-8"
   user-name: "moon"
   password: "1234"
   initial-size: 10
