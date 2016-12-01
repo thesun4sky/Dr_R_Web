@@ -8,7 +8,9 @@ import com.coawesome.persistence.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -120,7 +122,7 @@ public class AppController {
 
     }
     @RequestMapping(value= "/writeDiary",method= RequestMethod.POST)
-    public ResultVO writeDiary(HttpServletRequest request) {
+    public ResultVO writeDiary(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception {
         DiaryVO diaryVO = new DiaryVO();
         diaryVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
         diaryVO.setC_breakfast(request.getParameter("breakfast"));
@@ -131,6 +133,8 @@ public class AppController {
         diaryVO.setC_sleepTime(Integer.parseInt(request.getParameter("sleepTime")));
         diaryVO.setC_bloodPressure(Integer.parseInt(request.getParameter("bloodPressure")));
         diaryVO.setC_drinking(request.getParameter("drinking"));
+
+        ImageVO image = fileUtils.parseInsertFileInfo(file, diaryVO);
         diaryMapper.addDiary(diaryVO);
         System.out.println("diaryVO : " + diaryVO);
         return new ResultVO("정상 작동",1);
