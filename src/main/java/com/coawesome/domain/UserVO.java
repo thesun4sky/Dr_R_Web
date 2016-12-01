@@ -24,4 +24,5 @@ public class UserVO {
     private int u_w;
     private int u_h;
     private int p_id;
+    private int a_id;
 }
