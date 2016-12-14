@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -121,8 +122,9 @@ public class AppController {
         }
 
     }
+
     @RequestMapping(value= "/writeDiary",method= RequestMethod.POST)
-    public ResultVO writeDiary(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception {
+    public ResultVO writeDiary(HttpServletRequest request) throws Exception {
         DiaryVO diaryVO = new DiaryVO();
         diaryVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
         diaryVO.setC_breakfast(request.getParameter("breakfast"));
@@ -133,18 +135,19 @@ public class AppController {
         diaryVO.setC_sleepTime(Integer.parseInt(request.getParameter("sleepTime")));
         diaryVO.setC_bloodPressure(Integer.parseInt(request.getParameter("bloodPressure")));
         diaryVO.setC_drinking(request.getParameter("drinking"));
-
+        diaryVO.setC_img(request.getParameter("file").getBytes(Charset.forName("UTF-8")));
         diaryMapper.addDiary(diaryVO);
 
-        if(file != null) {
-            ImageVO image = fileUtils.parseInsertFileInfo(file, diaryVO);
-            diaryMapper.uploadDiaryImg(image);
-        }
+
         System.out.println("diaryVO : " + diaryVO);
         return new ResultVO("정상 작동",1);
     }
 
 
+    /*        if(file != null) {
+                ImageVO image = fileUtils.parseInsertFileInfo(file, diaryVO);
+                diaryMapper.uploadDiaryImg(image);
+            }*/
     @RequestMapping(value= "/uploadPhoto",method= RequestMethod.POST)
     public ResultVO uploadPhoto(@RequestParam("file") MultipartFile file, DiaryVO diaryVO) throws Exception {
 //        DiaryVO diaryVO = new DiaryVO();

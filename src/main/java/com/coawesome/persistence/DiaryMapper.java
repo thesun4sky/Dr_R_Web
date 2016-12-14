@@ -22,8 +22,8 @@ public interface DiaryMapper {
     DiaryVO getDiary(DiaryVO diaryVO);
 
     //다이어리 쓰기
-    @Insert("INSERT INTO check_list(u_id, c_temperature, c_humid, c_sleepTime, c_drinking, c_bloodPressure, c_memo, c_breakfast, c_lunch, c_dinner)" +
-            " VALUES(#{u_id}, #{c_temperature}, #{c_humid}, #{c_sleepTime}, #{c_drinking}, #{c_bloodPressure}, #{c_memo}, #{c_breakfast}, #{c_lunch}, #{c_dinner})")
+    @Insert("INSERT INTO check_list(u_id, c_temperature, c_humid, c_sleepTime, c_drinking, c_bloodPressure, c_memo, c_breakfast, c_lunch, c_dinner, c_img)" +
+            " VALUES(#{u_id}, #{c_temperature}, #{c_humid}, #{c_sleepTime}, #{c_drinking}, #{c_bloodPressure}, #{c_memo}, #{c_breakfast}, #{c_lunch}, #{c_dinner}, #{c_img})")
     void addDiary(DiaryVO diaryVO);
 
 
