@@ -2,6 +2,7 @@ package com.coawesome.persistence;
 
 import com.coawesome.domain.DiaryVO;
 import com.coawesome.domain.DoctorVO;
+import com.coawesome.domain.ImageVO;
 import com.coawesome.domain.UserVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -24,6 +25,12 @@ public interface DiaryMapper {
     @Insert("INSERT INTO check_list(u_id, c_temperature, c_humid, c_sleepTime, c_drinking, c_bloodPressure, c_memo, c_breakfast, c_lunch, c_dinner)" +
             " VALUES(#{u_id}, #{c_temperature}, #{c_humid}, #{c_sleepTime}, #{c_drinking}, #{c_bloodPressure}, #{c_memo}, #{c_breakfast}, #{c_lunch}, #{c_dinner})")
     void addDiary(DiaryVO diaryVO);
+
+
+    //다이어리 이미지 업로드
+    @Insert("INSERT INTO list_img(original_file_name, stored_file_name, list_id)" +
+            " VALUES(#{original_file_name}, #{stored_file_name}, #{list_id})")
+    void uploadDiaryImg(ImageVO imageVO);
 
 
     //다이어리 리스트 보기

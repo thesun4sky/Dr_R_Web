@@ -138,8 +138,8 @@ public class AppController {
 
         if(file != null) {
             ImageVO image = fileUtils.parseInsertFileInfo(file, diaryVO);
+            diaryMapper.uploadDiaryImg(image);
         }
-
         System.out.println("diaryVO : " + diaryVO);
         return new ResultVO("정상 작동",1);
     }
