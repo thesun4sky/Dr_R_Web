@@ -13,7 +13,7 @@ import java.util.*;
 @Component("fileUtils")
 public class FileUtils {
     private static final String filePath = "/home/centos/Dr_R_Client/app/storedimg/";
-
+//private static final String filePath = "/storedimg";
     public static String getRandomString(){
         return UUID.randomUUID().toString().replaceAll("-", "");
     }

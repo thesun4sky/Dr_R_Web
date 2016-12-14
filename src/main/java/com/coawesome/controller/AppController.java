@@ -134,8 +134,25 @@ public class AppController {
         diaryVO.setC_bloodPressure(Integer.parseInt(request.getParameter("bloodPressure")));
         diaryVO.setC_drinking(request.getParameter("drinking"));
 
-        ImageVO image = fileUtils.parseInsertFileInfo(file, diaryVO);
         diaryMapper.addDiary(diaryVO);
+
+        if(file != null) {
+            ImageVO image = fileUtils.parseInsertFileInfo(file, diaryVO);
+        }
+
+        System.out.println("diaryVO : " + diaryVO);
+        return new ResultVO("정상 작동",1);
+    }
+
+
+    @RequestMapping(value= "/uploadPhoto",method= RequestMethod.POST)
+    public ResultVO uploadPhoto(@RequestParam("file") MultipartFile file, DiaryVO diaryVO) throws Exception {
+//        DiaryVO diaryVO = new DiaryVO();
+        diaryVO.setU_id(1);
+        diaryVO.setList_id(1);
+
+        ImageVO image = fileUtils.parseInsertFileInfo(file, diaryVO);
+//        diaryMapper.addDiary(diaryVO);
         System.out.println("diaryVO : " + diaryVO);
         return new ResultVO("정상 작동",1);
     }

@@ -25,4 +25,6 @@ public class DiaryVO {
     private String c_drinking;
     private String c_memo;
     private String c_date = null;
+    private int img_id = 0;
+    private String stored_file_name = null;
 }
