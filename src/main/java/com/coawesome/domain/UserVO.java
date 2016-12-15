@@ -20,7 +20,7 @@ public class UserVO {
     private int u_a_date;
     private int u_b_month;
     private int u_b_date;
-    private int u_sex;
+    private String u_sex;
     private float u_w;
     private float u_h;
     private int p_id;
