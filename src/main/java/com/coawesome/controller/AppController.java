@@ -144,7 +144,7 @@ public class AppController {
             System.out.println("image : " + image);
             diaryVO.setC_img(image.getStored_file_name());
             diaryMapper.addDiaryWithImg(diaryVO);
-        }ㅇ
+        }
         else diaryMapper.addDiary(diaryVO);
 
 
