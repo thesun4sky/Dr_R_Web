@@ -211,8 +211,6 @@ public class WebController {
             userVOs.get(u).setC_date(date_string[u]);
             userVOs.get(u).setC_sleepTime(sl_numbers[u]);
             userVOs.get(u).setC_bloodPressure(bl_numbers[u]);
-
-            System.out.println(u+" userVOs = " + userVOs);
         }
         System.out.println("patient list : " + userVOs);
 
