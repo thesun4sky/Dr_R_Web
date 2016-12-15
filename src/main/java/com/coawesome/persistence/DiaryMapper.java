@@ -22,8 +22,8 @@ public interface DiaryMapper {
     DiaryVO getDiary(DiaryVO diaryVO);
 
     //다이어리 쓰기
-    @Insert("INSERT INTO check_list(u_id, c_temperature, c_humid, c_sleepTime, c_drinking, c_bloodPressure, c_memo, c_breakfast, c_lunch, c_dinner)" +
-            " VALUES(#{u_id}, #{c_temperature}, #{c_humid}, #{c_sleepTime}, #{c_drinking}, #{c_bloodPressure}, #{c_memo}, #{c_breakfast}, #{c_lunch}, #{c_dinner})")
+    @Insert("INSERT INTO check_list(u_id, c_shot, c_treat, c_h, c_w, c_memo, c_hospital, c_depart, c_next, c_date)" +
+            " VALUES(#{u_id}, #{c_shot}, #{c_treat}, #{c_h}, #{c_w}, #{c_memo}, #{c_hospital}, #{c_depart}, #{c_next}, #{c_date})")
     void addDiary(DiaryVO diaryVO);
 
 
@@ -59,5 +59,13 @@ public interface DiaryMapper {
     @Insert("INSERT INTO sleep_list(u_id, s_start, s_end, s_total )" +
             " VALUES(#{u_id}, #{s_start}, #{s_end}, #{s_total})")
     void addSleepTime(SleepVO sleepVO);
+
+
+    //다이어리 수면시간 리스트 보기
+    @Select("select * from sleep_list " +
+            "   INNER JOIN user ON user.u_id = sleep_list.u_id" +
+            "   WHERE sleep_list.u_id = #{u_id} " +
+            "   ORDER BY sleep_list.c_start DESC")
+    ArrayList<SleepVO> getAllSleepList(UserVO userVO);
 
 }

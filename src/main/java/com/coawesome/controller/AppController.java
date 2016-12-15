@@ -125,14 +125,19 @@ public class AppController {
     public ResultVO writeDiary(HttpServletRequest request) {
         DiaryVO diaryVO = new DiaryVO();
         diaryVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
-        diaryVO.setC_breakfast(request.getParameter("breakfast"));
-        diaryVO.setC_lunch(request.getParameter("lunch"));
-        diaryVO.setC_dinner(request.getParameter("dinner"));
-        diaryVO.setC_temperature(Integer.parseInt(request.getParameter("temperature")));
-        diaryVO.setC_humid(Integer.parseInt(request.getParameter("humid")));
-        diaryVO.setC_sleepTime(Integer.parseInt(request.getParameter("sleepTime")));
-        diaryVO.setC_bloodPressure(Integer.parseInt(request.getParameter("bloodPressure")));
-        diaryVO.setC_drinking(request.getParameter("drinking"));
+        diaryVO.setC_date(java.sql.Timestamp.valueOf(request.getParameter("c_date")));
+        diaryVO.setC_depart(request.getParameter("c_depart"));
+//        diaryVO.setC_feed_hour(Integer.parseInt(request.getParameter("c_feed_hour")));
+//        diaryVO.setC_feed_type(Integer.parseInt(request.getParameter("c_feed_type")));
+        diaryVO.setC_h(Float.parseFloat(request.getParameter("c_h")));
+        diaryVO.setC_w(Float.parseFloat(request.getParameter("c_w")));
+        diaryVO.setC_hospital(request.getParameter("c_hospital"));
+        diaryVO.setC_memo(request.getParameter("c_memo"));
+        diaryVO.setC_next(java.sql.Timestamp.valueOf(request.getParameter("c_next")));
+        diaryVO.setC_treat(request.getParameter("c_treat"));
+        diaryVO.setC_shot(request.getParameter("c_shot"));
+        diaryVO.setC_img(request.getParameter("c_img"));
+
         diaryMapper.addDiary(diaryVO);
         System.out.println("diaryVO : " + diaryVO);
         return new ResultVO("정상 작동",1);

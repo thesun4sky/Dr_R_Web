@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 public class SleepVO {
     private int s_id;
     private int u_id;
+    private String u_name;
     private java.sql.Timestamp s_start;
     private java.sql.Timestamp s_end;
     private int s_total;

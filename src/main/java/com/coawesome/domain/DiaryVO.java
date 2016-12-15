@@ -12,17 +12,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DiaryVO {
     private int list_id;
-    private int u_id;
-    private String u_name;
-    private String u_disease;
-    private String c_breakfast;
-    private String c_lunch;
-    private String c_dinner;
-    private int c_temperature;
-    private int c_humid;
-    private int c_sleepTime;
-    private int c_bloodPressure;
-    private String c_drinking;
-    private String c_memo;
-    private String c_date = null;
+    private int u_id;                 //계정ID
+    private String u_name;            //아기 이름
+    private float c_h;                //아기 키
+    private float c_w;                //아기 몸무게
+    private int c_feed_hour;          //수유시간
+    private int c_feed_type;         //수유 타입
+    private String c_hospital;       //병원
+    private String c_treat=null;     //증상(열,감기,설사)
+    private String c_shot=null;      //접종 주사
+    private java.sql.Timestamp c_next = null;  //예상 진료일
+    private String c_depart;                    //진료과
+    private String c_img;                       //이미지
+    private String c_memo;                      //엄마일기
+    private java.sql.Timestamp c_date = null;   //작성일
 }
