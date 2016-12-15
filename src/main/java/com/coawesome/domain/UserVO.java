@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+
 /**
  * Created by TeasunKim on 2016-11-03.
  */
@@ -20,4 +22,8 @@ public class UserVO {
     private String u_hospital;
     private String u_device;
     private int a_id;
+    private ArrayList<Integer> c_temperature;
+    private ArrayList<Integer> c_humid;
+    private ArrayList<Integer> c_sleepTime;
+    private ArrayList<Integer> c_bloodPressure;
 }

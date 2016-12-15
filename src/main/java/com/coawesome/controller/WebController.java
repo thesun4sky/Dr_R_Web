@@ -15,6 +15,8 @@ import javax.annotation.Resource;
 import javax.print.Doc;
 import java.util.ArrayList;
 
+import static java.lang.System.in;
+
 /**
  * Created by TeasunKim on 2016-11-03.
  */
@@ -161,6 +163,24 @@ public class WebController {
         //TODO 중복체크
         System.out.println("doctor : " + doctorVO);
         ArrayList<UserVO> userVOs = doctorMapper.getPatientList(doctorVO);
+        System.out.println("patient list of : " + doctorVO.getA_name());
+
+        return userVOs;
+    }
+
+
+    //환자 상태 리스트 보기
+    @RequestMapping(method = RequestMethod.POST, value = "api/getPatientStatusList")
+    public ArrayList<UserVO> getPatientStatusList(@RequestBody DoctorVO doctorVO) throws Exception {
+        //TODO 중복체크
+        System.out.println("doctor : " + doctorVO);
+        ArrayList<UserVO> userVOs = doctorMapper.getPatientList(doctorVO);
+        for(UserVO user : userVOs){
+            for (int i = 0; i < 10; i++) {
+               /* user.setC_temperature(doctorMapper.getTemperature(user,));
+                user.setC_humid(doctorMapper.get);*/
+            }
+        }
         System.out.println("patient list of : " + doctorVO.getA_name());
 
         return userVOs;
