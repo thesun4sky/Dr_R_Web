@@ -54,4 +54,9 @@ public interface UserMapper {
     @Update("update user SET u_device = #{u_device} WHERE login_id = #{login_id}")
     void setDeviceID(UserVO user);
 
+    //deviceID 삭제
+    @Update("update user SET u_device = 0 WHERE u_device = #{u_device}")
+    void deleteDeviceID(UserVO user);
+
+
 }

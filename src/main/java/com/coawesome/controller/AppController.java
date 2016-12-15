@@ -115,6 +115,7 @@ public class AppController {
 
         if(u_password.equals(found_password)){
             System.out.println("login success" + u_name);
+            userMapper.deleteDeviceID(userVO);
             userMapper.setDeviceID(userVO);
             return new ResultVO(u_name, u_id);
         }
@@ -126,7 +127,28 @@ public class AppController {
     }
 
     @RequestMapping(value= "/writeDiary",method= RequestMethod.POST)
-    public ResultVO writeDiary(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception {
+    public ResultVO writeDiary(HttpServletRequest request) throws Exception {
+        DiaryVO diaryVO = new DiaryVO();
+        diaryVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
+        diaryVO.setC_breakfast(request.getParameter("breakfast"));
+        diaryVO.setC_lunch(request.getParameter("lunch"));
+        diaryVO.setC_dinner(request.getParameter("dinner"));
+        diaryVO.setC_temperature(Integer.parseInt(request.getParameter("temperature")));
+        diaryVO.setC_humid(Integer.parseInt(request.getParameter("humid")));
+        diaryVO.setC_sleepTime(Integer.parseInt(request.getParameter("sleepTime")));
+        diaryVO.setC_bloodPressure(Integer.parseInt(request.getParameter("bloodPressure")));
+        diaryVO.setC_drinking(request.getParameter("drinking"));
+
+        diaryMapper.addDiary(diaryVO);
+
+
+        System.out.println("diaryVO : " + diaryVO);
+        return new ResultVO("정상 작동",1);
+    }
+
+
+    @RequestMapping(value= "/writeDiaryWithImg",method= RequestMethod.POST)
+    public ResultVO writeDiaryWithImg(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception {
         DiaryVO diaryVO = new DiaryVO();
         diaryVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
         diaryVO.setC_breakfast(request.getParameter("breakfast"));
@@ -151,7 +173,6 @@ public class AppController {
         System.out.println("diaryVO : " + diaryVO);
         return new ResultVO("정상 작동",1);
     }
-
 
     @RequestMapping(value= "/uploadPhoto",method= RequestMethod.POST)
     public ResultVO uploadPhoto(@RequestParam("file") MultipartFile file, DiaryVO diaryVO) throws Exception {
