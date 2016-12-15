@@ -139,12 +139,13 @@ public class AppController {
         diaryVO.setC_drinking(request.getParameter("drinking"));
         diaryVO.setOriginal_file_name(request.getParameter("fileName"));
 
-        if(file!=null) {
+        if(request.getParameter("fileName")!=null) {
             ImageVO image = fileUtils.parseInsertFileInfo(file, diaryVO);
             System.out.println("image : " + image);
             diaryVO.setC_img(image.getStored_file_name());
-        }
-        diaryMapper.addDiary(diaryVO);
+            diaryMapper.addDiaryWithImg(diaryVO);
+        }ㅇ
+        else diaryMapper.addDiary(diaryVO);
 
 
         System.out.println("diaryVO : " + diaryVO);

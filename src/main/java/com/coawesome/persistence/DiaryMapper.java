@@ -24,8 +24,13 @@ public interface DiaryMapper {
     //다이어리 쓰기
     @Insert("INSERT INTO check_list(u_id, c_temperature, c_humid, c_sleepTime, c_drinking, c_bloodPressure, c_memo, c_breakfast, c_lunch, c_dinner, c_img)" +
             " VALUES(#{u_id}, #{c_temperature}, #{c_humid}, #{c_sleepTime}, #{c_drinking}, #{c_bloodPressure}, #{c_memo}, #{c_breakfast}, #{c_lunch}, #{c_dinner}, #{c_img})")
-    void addDiary(DiaryVO diaryVO);
+    void addDiaryWithImg(DiaryVO diaryVO);
 
+
+    //다이어리 쓰기
+    @Insert("INSERT INTO check_list(u_id, c_temperature, c_humid, c_sleepTime, c_drinking, c_bloodPressure, c_memo, c_breakfast, c_lunch, c_dinner)" +
+            " VALUES(#{u_id}, #{c_temperature}, #{c_humid}, #{c_sleepTime}, #{c_drinking}, #{c_bloodPressure}, #{c_memo}, #{c_breakfast}, #{c_lunch}, #{c_dinner})")
+    void addDiary(DiaryVO diaryVO);
 
     //다이어리 이미지 업로드
     @Insert("INSERT INTO list_img(original_file_name, stored_file_name, list_id)" +
