@@ -5,6 +5,7 @@ import com.coawesome.domain.UserVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * Created by TeasunKim on 2016-11-03.
@@ -28,6 +29,11 @@ public interface UserMapper {
     //device 체크
     @Select("select count(*) from user where u_device = #{u_device}")
     int checkUserDevice(UserVO user);
+
+    //deviceID 업데이트
+    @Update("update user SET u_device = #{u_device} WHERE u_id = #{u_id}")
+    void setDeviceID(UserVO user);
+
 
     //deviceID로 이름 찾기
     @Select("select u_id, u_name from user where u_device = #{u_device}")

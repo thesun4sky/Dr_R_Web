@@ -99,6 +99,7 @@ public class AppController {
         UserVO userVO = new UserVO();
         userVO.setLogin_id(login_id);
         userVO.setU_password(u_password);
+        userVO.setU_device(request.getParameter("u_device"));
         int found_id = userMapper.checkUserLoginId(userVO);
         if (!(found_id > 0)) {
             System.out.println("login   failed");
@@ -111,6 +112,7 @@ public class AppController {
 
         if(u_password.equals(found_password)){
             System.out.println("login success" + u_name);
+            userMapper.setDeviceID(userVO);
             return new ResultVO(u_name, u_id);
         }
         else{
