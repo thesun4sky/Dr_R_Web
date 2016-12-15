@@ -32,10 +32,6 @@ public interface DiaryMapper {
             " VALUES(#{u_id}, #{c_temperature}, #{c_humid}, #{c_sleepTime}, #{c_drinking}, #{c_bloodPressure}, #{c_memo}, #{c_breakfast}, #{c_lunch}, #{c_dinner})")
     void addDiary(DiaryVO diaryVO);
 
-    //다이어리 이미지 업로드
-    @Insert("INSERT INTO list_img(original_file_name, stored_file_name, list_id)" +
-            " VALUES(#{original_file_name}, #{stored_file_name}, #{list_id})")
-    void uploadDiaryImg(ImageVO imageVO);
 
 
     //다이어리 리스트 보기
@@ -49,7 +45,6 @@ public interface DiaryMapper {
     @Select("select * from check_list " +
             "   INNER JOIN d_u ON d_u.u_id = check_list.u_id " +
             "   INNER JOIN user ON user.u_id = check_list.u_id" +
-            "   LEFT OUTER JOIN list_img ON list_img.list_id = check_list.list_id" +
             "   WHERE d_u.a_id = #{a_id} " +
             "   ORDER BY check_list.c_date DESC")
     ArrayList<DiaryVO> getAllDiaryList(DoctorVO doctorVO);
