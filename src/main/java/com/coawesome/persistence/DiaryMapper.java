@@ -2,6 +2,7 @@ package com.coawesome.persistence;
 
 import com.coawesome.domain.DiaryVO;
 import com.coawesome.domain.DoctorVO;
+import com.coawesome.domain.SleepVO;
 import com.coawesome.domain.UserVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -53,5 +54,10 @@ public interface DiaryMapper {
     @Update("update check_list SET c_temperature = #{c_temperature}, c_humid = #{c_humid} " +
             "WHERE u_id = #{u_id} AND (to_days(#{c_date})-to_days(c_date) <= -1 ) AND (to_days(#{c_date})-to_days(c_date) > 0 )")
     void setPatientValueWithDate(DiaryVO diaryVO);
+
+    //다이어리 수면시간 쓰기
+    @Insert("INSERT INTO sleep_list(u_id, s_start, s_end, s_total )" +
+            " VALUES(#{u_id}, #{s_start}, #{s_end}, #{s_total})")
+    void addSleepTime(SleepVO sleepVO);
 
 }

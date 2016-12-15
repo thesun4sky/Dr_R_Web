@@ -181,8 +181,8 @@ public class AppController {
         userVO.setU_b_month(Integer.parseInt(request.getParameter("u_b_month")));
         userVO.setU_b_date(Integer.parseInt(request.getParameter("u_b_date")));
         userVO.setU_sex(Integer.parseInt(request.getParameter("u_sex")));
-        userVO.setU_w(Integer.parseInt(request.getParameter("u_w")));
-        userVO.setU_h(Integer.parseInt(request.getParameter("u_h")));
+        userVO.setU_w(Float.parseFloat(request.getParameter("u_w")));
+        userVO.setU_h(Float.parseFloat(request.getParameter("u_h")));
         //TODO 이미지 추가    p_id
         System.out.println(userVO.toString());
         userMapper.addUser(userVO);
@@ -195,5 +195,21 @@ public class AppController {
         UserVO userVO = new UserVO();
         userVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
         return doctorMapper.getDocPhone(userVO);
+    }
+
+    @RequestMapping(value= "/addSleepTime",method= RequestMethod.POST)
+    public ResultVO addSleepTime(HttpServletRequest request) {
+        SleepVO sleepVO = new SleepVO();
+
+        sleepVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
+
+        System.out.println(sleepVO.getU_id() + "/" + request.getParameter("s_start") + "/" + request.getParameter("s_end"));
+        sleepVO.setS_start(java.sql.Timestamp.valueOf(request.getParameter("s_start")));
+        sleepVO.setS_end(java.sql.Timestamp.valueOf(request.getParameter("s_end")));
+        sleepVO.setS_total(Integer.parseInt(request.getParameter("s_total")));
+
+        diaryMapper.addSleepTime(sleepVO);
+
+        return new ResultVO("정상 작동",1);
     }
 }
