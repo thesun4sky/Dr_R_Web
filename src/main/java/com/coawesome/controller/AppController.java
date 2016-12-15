@@ -185,7 +185,7 @@ public class AppController {
         userVO.setU_a_date(Integer.parseInt(request.getParameter("u_a_date")));
         userVO.setU_b_month(Integer.parseInt(request.getParameter("u_b_month")));
         userVO.setU_b_date(Integer.parseInt(request.getParameter("u_b_date")));
-        userVO.setU_sex(Integer.parseInt(request.getParameter("u_sex")));
+        userVO.setU_sex(request.getParameter("u_sex"));
         userVO.setU_w(Float.parseFloat(request.getParameter("u_w")));
         userVO.setU_h(Float.parseFloat(request.getParameter("u_h")));
         //TODO 이미지 추가    p_id

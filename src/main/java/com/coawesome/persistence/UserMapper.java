@@ -31,7 +31,7 @@ public interface UserMapper {
     int checkUserDevice(UserVO user);
 
     //deviceID 업데이트
-    @Update("update user SET u_device = #{u_device} WHERE u_id = #{u_id}")
+    @Update("update user SET u_device = #{u_device} WHERE login_id = #{login_id}")
     void setDeviceID(UserVO user);
 
 
