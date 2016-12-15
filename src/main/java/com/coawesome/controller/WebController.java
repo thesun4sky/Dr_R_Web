@@ -175,11 +175,17 @@ public class WebController {
         //TODO 중복체크
         System.out.println("doctor : " + doctorVO);
         ArrayList<UserVO> userVOs = doctorMapper.getPatientList(doctorVO);
+        ArrayList<Integer> temp1;
+        ArrayList<Integer> temp2;
+        int[][] th_numbers = new int[2][10];
         for(UserVO user : userVOs){
-            for (int i = 0; i < 10; i++) {
-               /* user.setC_temperature(doctorMapper.getTemperature(user,));
-                user.setC_humid(doctorMapper.get);*/
-            }
+                temp1 = diaryMapper.getTemperature(user);
+                temp2 = diaryMapper.gethumid(user);
+                for(int i=0; i<temp1.size(); i++){
+                    th_numbers[0][i] = temp1.get(i);
+                    th_numbers[1][i] = temp2.get(i);
+                }
+            user.setC_temperatureAndHumid(th_numbers);
         }
         System.out.println("patient list of : " + doctorVO.getA_name());
 

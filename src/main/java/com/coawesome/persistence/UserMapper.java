@@ -5,6 +5,7 @@ import com.coawesome.domain.UserVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * Created by TeasunKim on 2016-11-03.
@@ -48,5 +49,9 @@ public interface UserMapper {
     //로그인
     @Select("select u_password from user where login_id = #{login_id}")
     String userLogincheck(UserVO user);
+
+    //deviceID 업데이트
+    @Update("update user SET u_device = #{u_device} WHERE login_id = #{login_id}")
+    void setDeviceID(UserVO user);
 
 }

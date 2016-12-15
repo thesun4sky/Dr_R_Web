@@ -102,6 +102,7 @@ public class AppController {
         UserVO userVO = new UserVO();
         userVO.setLogin_id(login_id);
         userVO.setU_password(u_password);
+        userVO.setU_device(request.getParameter("u_device"));
         int found_id = userMapper.checkUserLoginId(userVO);
         if (!(found_id > 0)) {
             System.out.println("login   failed");
@@ -114,6 +115,7 @@ public class AppController {
 
         if(u_password.equals(found_password)){
             System.out.println("login success" + u_name);
+            userMapper.setDeviceID(userVO);
             return new ResultVO(u_name, u_id);
         }
         else{
@@ -124,7 +126,7 @@ public class AppController {
     }
 
     @RequestMapping(value= "/writeDiary",method= RequestMethod.POST)
-    public ResultVO writeDiary(HttpServletRequest request) throws Exception {
+    public ResultVO writeDiary(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception {
         DiaryVO diaryVO = new DiaryVO();
         diaryVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
         diaryVO.setC_breakfast(request.getParameter("breakfast"));
@@ -135,7 +137,13 @@ public class AppController {
         diaryVO.setC_sleepTime(Integer.parseInt(request.getParameter("sleepTime")));
         diaryVO.setC_bloodPressure(Integer.parseInt(request.getParameter("bloodPressure")));
         diaryVO.setC_drinking(request.getParameter("drinking"));
-        diaryVO.setC_img(request.getAttribute("file").toString());
+        diaryVO.setOriginal_file_name(request.getParameter("fileName"));
+
+        if(file!=null) {
+            ImageVO image = fileUtils.parseInsertFileInfo(file, diaryVO);
+            System.out.println("image : " + image);
+            diaryVO.setC_img(image.getStored_file_name());
+        }
         diaryMapper.addDiary(diaryVO);
 
 
@@ -144,10 +152,6 @@ public class AppController {
     }
 
 
-    /*        if(file != null) {
-                ImageVO image = fileUtils.parseInsertFileInfo(file, diaryVO);
-                diaryMapper.uploadDiaryImg(image);
-            }*/
     @RequestMapping(value= "/uploadPhoto",method= RequestMethod.POST)
     public ResultVO uploadPhoto(@RequestParam("file") MultipartFile file, DiaryVO diaryVO) throws Exception {
 //        DiaryVO diaryVO = new DiaryVO();
@@ -155,6 +159,7 @@ public class AppController {
         diaryVO.setList_id(1);
 
         ImageVO image = fileUtils.parseInsertFileInfo(file, diaryVO);
+        System.out.println("image : " + image);
 //        diaryMapper.addDiary(diaryVO);
         System.out.println("diaryVO : " + diaryVO);
         return new ResultVO("정상 작동",1);

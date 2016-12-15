@@ -22,8 +22,7 @@ public class UserVO {
     private String u_hospital;
     private String u_device;
     private int a_id;
-    private ArrayList<Integer> c_temperature;
-    private ArrayList<Integer> c_humid;
-    private ArrayList<Integer> c_sleepTime;
-    private ArrayList<Integer> c_bloodPressure;
+    private int[][] c_temperatureAndHumid;
+    private int[][] c_sleepTime;
+    private int[][] c_bloodPressure;
 }

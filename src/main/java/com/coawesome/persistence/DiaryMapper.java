@@ -64,4 +64,16 @@ public interface DiaryMapper {
             "WHERE u_id = #{u_id} AND (to_days(#{c_date})-to_days(c_date) <= -1 ) AND (to_days(#{c_date})-to_days(c_date) > 0 )")
     void setPatientValueWithDate(DiaryVO diaryVO);
 
+
+    //다이어리 온도 보기
+    @Select("select c_temperature from check_list " +
+            "INNER JOIN user ON user.u_id = check_list.u_id " +
+            "WHERE check_list.u_id = #{u_id} ORDER BY c_date DESC LIMIT 10")
+    ArrayList<Integer> getTemperature(UserVO userVO);
+
+    //다이어리 습도 보기
+    @Select("select c_humid from check_list " +
+            "INNER JOIN user ON user.u_id = check_list.u_id " +
+            "WHERE check_list.u_id = #{u_id} ORDER BY c_date DESC LIMIT 10")
+    ArrayList<Integer> gethumid(UserVO userVO);
 }

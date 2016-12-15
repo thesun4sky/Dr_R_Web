@@ -13,7 +13,7 @@ import java.util.*;
 @Component("fileUtils")
 public class FileUtils {
     private static final String filePath = "/home/centos/Dr_R_Client/app/storedimg/";
-//private static final String filePath = "/storedimg";
+//private static final String filePath = "/";
     public static String getRandomString(){
         return UUID.randomUUID().toString().replaceAll("-", "");
     }
@@ -35,14 +35,14 @@ public class FileUtils {
         }
         ImageVO image = new ImageVO();
         if(multipartFile.isEmpty() == false){
-            originalFileName = multipartFile.getOriginalFilename();
+            originalFileName = diaryVO.getOriginal_file_name();
             originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
             storedFileName = getRandomString() + originalFileExtension;
 
             file = new File(filePath + storedFileName);
             multipartFile.transferTo(file);
 
-            image.setOriginal_file_name(originalFileName);
+//            image.setOriginal_file_name(originalFileName);
             image.setStored_file_name(storedFileName);
             image.setFile_size(multipartFile.getSize());
             image.setList_id(diaryVO.getList_id());
