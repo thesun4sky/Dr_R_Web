@@ -135,7 +135,7 @@ public class AppController {
         diaryVO.setC_sleepTime(Integer.parseInt(request.getParameter("sleepTime")));
         diaryVO.setC_bloodPressure(Integer.parseInt(request.getParameter("bloodPressure")));
         diaryVO.setC_drinking(request.getParameter("drinking"));
-        diaryVO.setC_img(request.getParameter("file").getBytes(Charset.forName("UTF-8")));
+        diaryVO.setC_img(request.getParameter("file"));
         diaryMapper.addDiary(diaryVO);
 
 
