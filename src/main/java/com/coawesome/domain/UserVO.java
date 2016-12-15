@@ -25,4 +25,5 @@ public class UserVO {
     private int[][] c_temperatureAndHumid;
     private int[][] c_sleepTime;
     private int[][] c_bloodPressure;
+    private String[] c_date;
 }

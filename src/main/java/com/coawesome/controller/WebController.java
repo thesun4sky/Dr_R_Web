@@ -13,7 +13,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.print.Doc;
+import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import static java.lang.System.in;
 
@@ -175,19 +179,42 @@ public class WebController {
         //TODO 중복체크
         System.out.println("doctor : " + doctorVO);
         ArrayList<UserVO> userVOs = doctorMapper.getPatientList(doctorVO);
-        ArrayList<Integer> temp1;
-        ArrayList<Integer> temp2;
-        int[][] th_numbers = new int[2][10];
-        for(UserVO user : userVOs){
-                temp1 = diaryMapper.getTemperature(user);
-                temp2 = diaryMapper.gethumid(user);
+        int[][][] th_numbers = new int[30][2][10];
+        String[][] date_string = new String[30][10];
+        int[][][] sl_numbers = new int[30][2][10];
+        int[][][] bl_numbers = new int[30][2][10];
+        for(int u=0; u < userVOs.size(); u++){
+                ArrayList<Integer> temp1 = new ArrayList<>();
+                ArrayList<Integer> temp2 = new ArrayList<>();
+                ArrayList<String> temp3 = new ArrayList<>();
+                ArrayList<Integer> temp4 = new ArrayList<>();
+                ArrayList<Integer> temp5 = new ArrayList<>();
+                temp1 = diaryMapper.getTemperature(userVOs.get(u));
+                temp2 = diaryMapper.gethumid(userVOs.get(u));
+                temp3 = diaryMapper.getDate(userVOs.get(u));
+                temp4 = diaryMapper.getSleepTime(userVOs.get(u));
+                temp5 = diaryMapper.getBloodPressure(userVOs.get(u));
+                SimpleDateFormat dateFormat = new  SimpleDateFormat("yyyy-MM-dd HH:mm:ss.0", Locale.KOREA);
+                SimpleDateFormat dateFormat2 = new  SimpleDateFormat("MM월dd일 HH:mm", Locale.KOREA);
                 for(int i=0; i<temp1.size(); i++){
-                    th_numbers[0][i] = temp1.get(i);
-                    th_numbers[1][i] = temp2.get(i);
+                    th_numbers[u][0][9-i] = temp1.get(i);
+                    th_numbers[u][1][9-i] = temp2.get(i);
+                    date_string[u][9-i] = temp3.get(i);
+                    Date date = dateFormat.parse(date_string[u][9-i]);
+                    date_string[u][9-i] = dateFormat2.format(date);
+                    sl_numbers[u][0][9-i] = temp4.get(i);
+                    sl_numbers[u][1][9-i] = 0;
+                    bl_numbers[u][0][9-i] = temp5.get(i);
+                    bl_numbers[u][1][9-i] = 0;
                 }
-            user.setC_temperatureAndHumid(th_numbers);
+            userVOs.get(u).setC_temperatureAndHumid(th_numbers[u]);
+            userVOs.get(u).setC_date(date_string[u]);
+            userVOs.get(u).setC_sleepTime(sl_numbers[u]);
+            userVOs.get(u).setC_bloodPressure(bl_numbers[u]);
+
+            System.out.println(u+" userVOs = " + userVOs);
         }
-        System.out.println("patient list of : " + doctorVO.getA_name());
+        System.out.println("patient list : " + userVOs);
 
         return userVOs;
     }

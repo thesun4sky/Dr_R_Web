@@ -76,4 +76,22 @@ public interface DiaryMapper {
             "INNER JOIN user ON user.u_id = check_list.u_id " +
             "WHERE check_list.u_id = #{u_id} ORDER BY c_date DESC LIMIT 10")
     ArrayList<Integer> gethumid(UserVO userVO);
+
+    //다이어리 날짜 보기
+    @Select("select c_date from check_list " +
+            "INNER JOIN user ON user.u_id = check_list.u_id " +
+            "WHERE check_list.u_id = #{u_id} ORDER BY c_date DESC LIMIT 10")
+    ArrayList<String> getDate(UserVO userVO);
+
+    //다이어리 수면시간 보기
+    @Select("select c_sleepTime from check_list " +
+            "INNER JOIN user ON user.u_id = check_list.u_id " +
+            "WHERE check_list.u_id = #{u_id} ORDER BY c_date DESC LIMIT 10")
+    ArrayList<Integer> getSleepTime(UserVO userVO);
+
+    //다이어리 수면시간 보기
+    @Select("select c_bloodPressure from check_list " +
+            "INNER JOIN user ON user.u_id = check_list.u_id " +
+            "WHERE check_list.u_id = #{u_id} ORDER BY c_date DESC LIMIT 10")
+    ArrayList<Integer> getBloodPressure(UserVO userVO);
 }
