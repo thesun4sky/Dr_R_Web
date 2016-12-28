@@ -68,4 +68,8 @@ public interface DiaryMapper {
             "   ORDER BY sleep_list.c_start DESC")
     ArrayList<SleepVO> getAllSleepList(UserVO userVO);
 
+    //해당 날짜 다이어리 수면시간 리스트 보기
+    @Select("select * from sleep_list WHERE u_id = #{u_id} AND date(s_start) = date(#{s_start}) ")
+    ArrayList<SleepVO> getSleepTime(SleepVO sleepVO);
+
 }
