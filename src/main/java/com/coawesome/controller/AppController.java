@@ -218,6 +218,23 @@ public class AppController {
         return new ResultVO("정상 작동",1);
     }
 
+    @RequestMapping(value= "/addFeedTime",method= RequestMethod.POST)
+    public ResultVO addFeedTime(HttpServletRequest request) {
+        FeedVO feedVO = new FeedVO();
+
+        feedVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
+
+        System.out.println(feedVO.getU_id() + "/" + request.getParameter("s_start") + "/" + request.getParameter("s_end"));
+        feedVO.setF_start(java.sql.Timestamp.valueOf(request.getParameter("s_start")));
+        feedVO.setF_end(java.sql.Timestamp.valueOf(request.getParameter("s_end")));
+        feedVO.setF_total(Integer.parseInt(request.getParameter("s_total")));
+        feedVO.setFeed(request.getParameter("feed"));
+
+        diaryMapper.addFeedTime(feedVO);
+
+        return new ResultVO("정상 작동",1);
+    }
+
     //해당 날짜 수면시간 불러오기
     @RequestMapping(value= "/getSleepTime",method= RequestMethod.POST)
     public ArrayList<SleepVO> getSleepTime(HttpServletRequest request) {
