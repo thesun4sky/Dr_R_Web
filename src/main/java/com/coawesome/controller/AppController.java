@@ -225,11 +225,12 @@ public class AppController {
 
         sleepVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
 
-        //System.out.println(sleepVO.getU_id() + "/" + request.getParameter("s_start") );
+        System.out.println(sleepVO.getU_id() + "/" + request.getParameter("s_start") );
         sleepVO.setS_start(java.sql.Timestamp.valueOf(request.getParameter("s_start")));
 
         ArrayList<SleepVO> arrayList =  diaryMapper.getSleepTime(sleepVO);
 
+        System.out.println(arrayList);
         return arrayList;
     }
 }
