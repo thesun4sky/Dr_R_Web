@@ -61,7 +61,7 @@ public interface DiaryMapper {
     @Select("select * from sleep_list " +
             "   INNER JOIN user ON user.u_id = sleep_list.u_id" +
             "   WHERE sleep_list.u_id = #{u_id} " +
-            "   ORDER BY sleep_list.c_start DESC")
+            "   ORDER BY sleep_list.f_start DESC")
     ArrayList<SleepVO> getAllSleepList(UserVO userVO);
 
     //해당 날짜 다이어리 수면시간 리스트 보기
@@ -75,10 +75,10 @@ public interface DiaryMapper {
     void addFeedTime(FeedVO feedVO);
 
     //다이어리 수유시간 리스트 보기
-    @Select("select * from sleep_list " +
-            "   INNER JOIN user ON user.u_id = sleep_list.u_id" +
-            "   WHERE sleep_list.u_id = #{u_id} " +
-            "   ORDER BY sleep_list.c_start DESC")
+    @Select("select * from feed_list " +
+            "   INNER JOIN user ON user.u_id = feed_list.u_id" +
+            "   WHERE feed_list.u_id = #{u_id} " +
+            "   ORDER BY feed_list.f_start DESC")
     ArrayList<SleepVO> getAllFeedList(UserVO userVO);
 
 

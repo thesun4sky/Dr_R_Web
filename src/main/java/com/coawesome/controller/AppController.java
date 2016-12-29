@@ -235,6 +235,19 @@ public class AppController {
         return new ResultVO("정상 작동",1);
     }
 
+    @RequestMapping(value= "/getAllFeedList",method= RequestMethod.POST)
+    public ArrayList<FeedVO> getAllFeedList(HttpServletRequest request) {
+        ArrayList<FeedVO> feedList = new ArrayList<>();
+
+        return feedList;
+    }
+
+    @RequestMapping(value= "/getAllSleepList",method= RequestMethod.POST)
+    public ArrayList<SleepVO> getAllSleepList(HttpServletRequest request) {
+        ArrayList<SleepVO> sleepList = new ArrayList<>();
+        return sleepList;
+    }
+
     //해당 날짜 수면시간 불러오기
     @RequestMapping(value= "/getSleepTime",method= RequestMethod.POST)
     public ArrayList<SleepVO> getSleepTime(HttpServletRequest request) {
