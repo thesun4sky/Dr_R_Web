@@ -1,9 +1,6 @@
 package com.coawesome.persistence;
 
-import com.coawesome.domain.DiaryVO;
-import com.coawesome.domain.DoctorVO;
-import com.coawesome.domain.SleepVO;
-import com.coawesome.domain.UserVO;
+import com.coawesome.domain.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -64,16 +61,30 @@ public interface DiaryMapper {
             " VALUES(#{u_id}, #{s_start}, #{s_end}, #{s_total})")
     void addSleepTime(SleepVO sleepVO);
 
-
     //다이어리 수면시간 리스트 보기
     @Select("select * from sleep_list " +
             "   INNER JOIN user ON user.u_id = sleep_list.u_id" +
             "   WHERE sleep_list.u_id = #{u_id} " +
-            "   ORDER BY sleep_list.c_start DESC")
+            "   ORDER BY sleep_list.f_start DESC")
     ArrayList<SleepVO> getAllSleepList(UserVO userVO);
 
     //해당 날짜 다이어리 수면시간 리스트 보기
     @Select("select * from sleep_list WHERE u_id = #{u_id} AND date(s_start) = date(#{s_start}) ")
     ArrayList<SleepVO> getSleepTime(SleepVO sleepVO);
+
+
+    //다이어리 수유시간 쓰기
+    @Insert("INSERT INTO feed_list(u_id, f_start, f_end, f_total, feed )" +
+            " VALUES(#{u_id}, #{f_start}, #{f_end}, #{f_total}, #{feed})")
+    void addFeedTime(FeedVO feedVO);
+
+    //다이어리 수유시간 리스트 보기
+    @Select("select * from feed_list " +
+            "   INNER JOIN user ON user.u_id = feed_list.u_id" +
+            "   WHERE feed_list.u_id = #{u_id} " +
+            "   ORDER BY feed_list.f_start DESC")
+    ArrayList<SleepVO> getAllFeedList(UserVO userVO);
+
+
 
 }
