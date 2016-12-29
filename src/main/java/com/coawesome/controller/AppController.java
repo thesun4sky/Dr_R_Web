@@ -8,7 +8,9 @@ import com.coawesome.persistence.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -127,8 +129,27 @@ public class AppController {
         diaryVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
         diaryVO.setC_date(java.sql.Timestamp.valueOf(request.getParameter("c_date")));
         diaryVO.setC_depart(request.getParameter("c_depart"));
-//        diaryVO.setC_feed_hour(Integer.parseInt(request.getParameter("c_feed_hour")));
-//        diaryVO.setC_feed_type(Integer.parseInt(request.getParameter("c_feed_type")));
+        diaryVO.setC_h(Float.parseFloat(request.getParameter("c_h")));
+        diaryVO.setC_w(Float.parseFloat(request.getParameter("c_w")));
+        diaryVO.setC_hospital(request.getParameter("c_hospital"));
+        diaryVO.setC_memo(request.getParameter("c_memo"));
+        diaryVO.setC_next(java.sql.Timestamp.valueOf(request.getParameter("c_next")));
+        diaryVO.setC_treat(request.getParameter("c_treat"));
+        diaryVO.setC_shot(request.getParameter("c_shot"));
+
+        diaryMapper.addDiary(diaryVO);
+        System.out.println("diaryVO : " + diaryVO);
+        return new ResultVO("정상 작동",1);
+    }
+
+
+    @RequestMapping(value= "/writeDiaryWithImg",method= RequestMethod.POST)
+    public ResultVO writeDiaryWithImg(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception {
+        DiaryVO diaryVO = new DiaryVO();
+
+        diaryVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
+        diaryVO.setC_date(java.sql.Timestamp.valueOf(request.getParameter("c_date")));
+        diaryVO.setC_depart(request.getParameter("c_depart"));
         diaryVO.setC_h(Float.parseFloat(request.getParameter("c_h")));
         diaryVO.setC_w(Float.parseFloat(request.getParameter("c_w")));
         diaryVO.setC_hospital(request.getParameter("c_hospital"));
@@ -138,10 +159,20 @@ public class AppController {
         diaryVO.setC_shot(request.getParameter("c_shot"));
         diaryVO.setC_img(request.getParameter("c_img"));
 
-        diaryMapper.addDiary(diaryVO);
+        if(request.getParameter("fileName")!=null) {
+            ImageVO image = fileUtils.parseInsertFileInfo(file, diaryVO);
+            System.out.println("image : " + image);
+            diaryVO.setC_img(image.getStored_file_name());
+            diaryMapper.addDiaryWithImg(diaryVO);
+        }
+        else diaryMapper.addDiary(diaryVO);
+
+
         System.out.println("diaryVO : " + diaryVO);
         return new ResultVO("정상 작동",1);
     }
+
+
 
     @RequestMapping(value= "/getDiaries",method= RequestMethod.POST)
     public ArrayList<DiaryVO> getDiary(HttpServletRequest request) {

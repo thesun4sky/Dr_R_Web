@@ -12,8 +12,8 @@ import java.util.*;
 
 @Component("fileUtils")
 public class FileUtils {
-    private static final String filePath = "/home/centos/Dr_R_Web/build/resources/main/static/storedimg/";
-
+    private static final String filePath = "/home/centos/Dr_R_Client/app/storedimg/";
+    //private static final String filePath = "/";
     public static String getRandomString(){
         return UUID.randomUUID().toString().replaceAll("-", "");
     }
@@ -24,7 +24,7 @@ public class FileUtils {
         return (file.delete());
     }
 
-    public ImageVO parseInsertFileInfo(MultipartFile multipartFile, BoardVO board) throws Exception{
+    public ImageVO parseInsertFileInfo(MultipartFile multipartFile, DiaryVO diaryVO) throws Exception{
         String originalFileName = null;
         String originalFileExtension = null;
         String storedFileName = null;
@@ -35,23 +35,22 @@ public class FileUtils {
         }
         ImageVO image = new ImageVO();
         if(multipartFile.isEmpty() == false){
-            originalFileName = multipartFile.getOriginalFilename();
+            originalFileName = diaryVO.getC_img();
             originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
             storedFileName = getRandomString() + originalFileExtension;
 
             file = new File(filePath + storedFileName);
             multipartFile.transferTo(file);
 
-
-            image.setOriginal_file_name(originalFileName);
+//            image.setOriginal_file_name(originalFileName);
             image.setStored_file_name(storedFileName);
             image.setFile_size(multipartFile.getSize());
-            image.setBoard_id(board.getBoard_id());
-            image.setCreator_id(board.getU_id());
+            image.setList_id(diaryVO.getList_id());
+            image.setU_id(diaryVO.getU_id());
             System.out.println(image);
         }
         return image;
-   }
+    }
 
 
     public ImageVO parseInsertFileInfoForUser(MultipartFile multipartFile, UserVO user) throws Exception{
@@ -74,8 +73,8 @@ public class FileUtils {
             file = new File(filePath + storedFileName);
             multipartFile.transferTo(file);
 
-            image.setUser_img(storedFileName);  //저장된 이미지 이름
-            image.setLogin_id(user.getU_id());
+            image.setUser_pic(storedFileName);  //저장된 이미지 이름
+            image.setU_id(user.getU_id());
             System.out.println(image);
         }
         return image;
