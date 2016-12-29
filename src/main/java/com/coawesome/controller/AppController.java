@@ -159,7 +159,7 @@ public class AppController {
         diaryVO.setC_shot(request.getParameter("c_shot"));
         diaryVO.setC_img(request.getParameter("c_img"));
 
-        if(request.getParameter("fileName")!=null) {
+        if(request.getParameter("c_img")!=null) {
             ImageVO image = fileUtils.parseInsertFileInfo(file, diaryVO);
             System.out.println("image : " + image);
             diaryVO.setC_img(image.getStored_file_name());
