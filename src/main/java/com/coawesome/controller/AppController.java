@@ -114,6 +114,7 @@ public class AppController {
 
         if(u_password.equals(found_password)){
             System.out.println("login success" + u_name);
+            userMapper.deleteDeviceID(userVO);
             userMapper.setDeviceID(userVO);
             return new ResultVO(u_name, u_id);
         }
