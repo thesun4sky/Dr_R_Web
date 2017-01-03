@@ -33,7 +33,7 @@ public interface DiaryMapper {
     ArrayList<DiaryVO> getDiaryList(UserVO userVO);
 
     //다이어리 보기
-    @Select("select * from check_list INNER JOIN user ON user.u_id = check_list.u_id where check_list.u_id = #{u_id} AND check_list.c_date = #{c_date}")
+    @Select("select * from check_list INNER JOIN user ON user.u_id = check_list.u_id where check_list.u_id = #{u_id} AND check_list.c_date = #{c_date} LIMIT 1")
     DiaryVO getDiaryByDate(DiaryVO diaryVO);
 
     //다이어리 리스트 보기

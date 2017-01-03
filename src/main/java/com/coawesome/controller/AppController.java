@@ -183,6 +183,7 @@ public class AppController {
         diaryVO.setC_date(java.sql.Timestamp.valueOf(request.getParameter("c_date")));
         DiaryVO diaryVOs = diaryMapper.getDiaryByDate(diaryVO);
 
+        System.out.println("diaryVO by date : " + diaryVOs);
         return diaryVOs;
     }
 
