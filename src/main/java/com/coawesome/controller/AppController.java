@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -174,13 +175,13 @@ public class AppController {
     }
 
 
-
-    @RequestMapping(value= "/getDiaries",method= RequestMethod.POST)
-    public ArrayList<DiaryVO> getDiary(HttpServletRequest request) {
+    @RequestMapping(value= "/getDiary",method= RequestMethod.POST)
+    public DiaryVO getDiary(HttpServletRequest request) {
         //TODO 중복체크
-        UserVO userVO = new UserVO();
-        userVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
-        ArrayList<DiaryVO> diaryVOs = diaryMapper.getDiaryList(userVO);
+        DiaryVO diaryVO = new DiaryVO();
+        diaryVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
+        diaryVO.setC_date(java.sql.Timestamp.valueOf(request.getParameter("c_date")));
+        DiaryVO diaryVOs = diaryMapper.getDiaryByDate(diaryVO);
 
         return diaryVOs;
     }
