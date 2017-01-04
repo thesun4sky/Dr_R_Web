@@ -107,9 +107,9 @@ public interface DiaryMapper {
     //다이어리 수유시간 해당일자 리스트 조회
     @Select("select * from feed_list " +
             "   INNER JOIN user ON user.u_id = feed_list.u_id" +
-            "   WHERE feed_list.u_id = #{u_id} AND date(f_start) = date(#{f_start}) )" +
+            "   WHERE feed_list.u_id = #{u_id} AND date(f_start) = date(#{f_start})" +
             "   ORDER BY feed_list.f_start DESC")
-    ArrayList<FeedVO> getAllFeedListByDate(FeedVO feedVO);
+    ArrayList<FeedVO> getFeedListByDate(FeedVO feedVO);
 
     //수유시간 일자별로 보기
     @Select("SELECT cast(MAX(f_start) as DATE) as f_start, SUM(f_total) as f_total from feed_list WHERE u_id = #{u_id} " +

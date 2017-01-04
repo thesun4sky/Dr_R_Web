@@ -324,8 +324,8 @@ public class AppController {
         return arrayList;
     }
 
-    @RequestMapping(value= "/getAllFeedTimeByDate",method= RequestMethod.POST)
-    public ArrayList<FeedVO> getAllFeedTimeByDate(HttpServletRequest request) {
+    @RequestMapping(value= "/getFeedTimeByDate",method= RequestMethod.POST)
+    public ArrayList<FeedVO> getFeedTimeByDate(HttpServletRequest request) {
         FeedVO feedVO = new FeedVO();
 
         feedVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
@@ -333,7 +333,7 @@ public class AppController {
         System.out.println(feedVO.getU_id() + "/" + request.getParameter("f_start") );
         feedVO.setF_start(java.sql.Timestamp.valueOf(request.getParameter("f_start")));
 
-        ArrayList<FeedVO> arrayList =  diaryMapper.getAllFeedListByDate(feedVO);
+        ArrayList<FeedVO> arrayList =  diaryMapper.getFeedListByDate(feedVO);
 
         return arrayList;
     }
