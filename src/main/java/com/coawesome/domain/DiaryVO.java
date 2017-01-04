@@ -23,7 +23,7 @@ public class DiaryVO {
     private String c_shot=null;      //접종 주사
     private String c_next = null;  //예상 진료일
     private String c_depart;                    //진료과
-    private String c_img;                       //이미지
+    private String c_img ;                       //이미지
     private String c_memo;                      //엄마일기
     private java.sql.Timestamp c_date = null;   //작성일
 }
