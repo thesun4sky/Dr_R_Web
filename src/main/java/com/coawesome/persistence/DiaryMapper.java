@@ -30,12 +30,12 @@ public interface DiaryMapper {
 
     //다이어리 업데이트(with newImg)
     @Update("UPDATE check_list SET c_shot =  #{c_shot}, c_treat = #{c_treat}, c_h = #{c_h}, c_w = #{c_w}, c_memo = #{c_memo}, c_hospital = #{c_hospital}, c_depart = #{c_depart}, c_next = #{c_next} c_img = #{c_img} " +
-            "WHERE u_id = #{u_id} AND c_date = #{c_date})")
+            "WHERE u_id = #{u_id} AND c_date = #{c_date}")
     void updateDiaryWithNewImg(DiaryVO diaryVO);
 
     //다이어리 업데이트(with prevImg)
     @Update("UPDATE check_list SET c_shot =  #{c_shot}, c_treat = #{c_treat}, c_h = #{c_h}, c_w = #{c_w}, c_memo = #{c_memo}, c_hospital = #{c_hospital}, c_depart = #{c_depart}, c_next = #{c_next} " +
-            "WHERE u_id = #{u_id} AND c_date = #{c_date})")
+            "WHERE u_id = #{u_id} AND c_date = #{c_date}")
     void updateDiaryWithPrevImg(DiaryVO diaryVO);
 
     //다이어리 리스트 보기
