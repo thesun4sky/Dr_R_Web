@@ -345,6 +345,7 @@ public class AppController {
         sleepVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
 
         ArrayList<SleepVO> arrayList =  diaryMapper.getDateSleepTime(sleepVO);
+        System.out.println("getDateSleepTime"+ arrayList);
 
         return arrayList;
     }
@@ -357,6 +358,7 @@ public class AppController {
 
         ArrayList<FeedVO> arrayList =  diaryMapper.getDateFeedTime(feedVO);
 
+        System.out.println("getDateFeedTime"+ arrayList);
         return arrayList;
     }
 }
