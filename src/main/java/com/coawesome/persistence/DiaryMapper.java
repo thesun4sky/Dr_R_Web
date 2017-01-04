@@ -28,6 +28,16 @@ public interface DiaryMapper {
             " VALUES(#{u_id}, #{c_shot}, #{c_treat}, #{c_h}, #{c_w}, #{c_memo}, #{c_hospital}, #{c_depart}, #{c_next}, #{c_date}, #{c_img})")
     void addDiaryWithImg(DiaryVO diaryVO);
 
+    //다이어리 업데이트(with newImg)
+    @Update("UPDATE check_list SET c_shot =  #{c_shot}, c_treat = #{c_treat}, c_h = #{c_h}, c_w = #{c_w}, c_memo = #{c_memo}, c_hospital = #{c_hospital}, c_depart = #{c_depart}, c_next = #{c_next} c_img = #{c_img} " +
+            "WHERE u_id = #{u_id} AND c_date = #{c_date})")
+    void updateDiaryWithNewImg(DiaryVO diaryVO);
+
+    //다이어리 업데이트(with prevImg)
+    @Update("UPDATE check_list SET c_shot =  #{c_shot}, c_treat = #{c_treat}, c_h = #{c_h}, c_w = #{c_w}, c_memo = #{c_memo}, c_hospital = #{c_hospital}, c_depart = #{c_depart}, c_next = #{c_next}" +
+            "WHERE u_id = #{u_id} AND c_date = #{c_date})")
+    void updateDiaryWithPrevImg(DiaryVO diaryVO);
+
     //다이어리 리스트 보기
     @Select("select * from check_list INNER JOIN user ON user.u_id = check_list.u_id where check_list.u_id = #{u_id} ORDER BY c_date DESC")
     ArrayList<DiaryVO> getDiaryList(UserVO userVO);

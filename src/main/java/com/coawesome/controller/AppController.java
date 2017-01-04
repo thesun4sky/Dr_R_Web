@@ -161,19 +161,30 @@ public class AppController {
         diaryVO.setC_shot(request.getParameter("c_shot"));
         diaryVO.setC_img(request.getParameter("c_img"));
 
-        if(request.getParameter("c_img")!=null) {
-            ImageVO image = fileUtils.parseInsertFileInfo(file, diaryVO);
-            System.out.println("image : " + image);
-            diaryVO.setC_img(image.getStored_file_name());
-            diaryMapper.addDiaryWithImg(diaryVO);
+        DiaryVO diaryExist = diaryMapper.getDiaryByDate(diaryVO);
+        if(diaryExist == null){                                 //기존의 일지가 없으면
+            if(request.getParameter("c_img")!=null) {
+                ImageVO image = fileUtils.parseInsertFileInfo(file, diaryVO);
+                System.out.println("image : " + image);
+                diaryVO.setC_img(image.getStored_file_name());
+                diaryMapper.addDiaryWithImg(diaryVO);
+            }
+            else diaryMapper.addDiary(diaryVO);
         }
-        else diaryMapper.addDiary(diaryVO);
+        else{
+            if(request.getParameter("c_img")!=null) {
+                ImageVO image = fileUtils.parseInsertFileInfo(file, diaryVO);
+                System.out.println("image : " + image);
+                diaryVO.setC_img(image.getStored_file_name());
+                diaryMapper.updateDiaryWithNewImg(diaryVO);
+            }
+            else diaryMapper.updateDiaryWithPrevImg(diaryVO);
 
+        }
 
         System.out.println("diaryVO : " + diaryVO);
         return new ResultVO("정상 작동",1);
     }
-
 
     @RequestMapping(value= "/getDiary",method= RequestMethod.POST)
     public DiaryVO getDiary(HttpServletRequest request) {
