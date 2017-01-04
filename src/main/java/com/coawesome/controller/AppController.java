@@ -326,8 +326,8 @@ public class AppController {
 
         feedVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
 
-        System.out.println(feedVO.getU_id() + "/" + request.getParameter("f_date") );
-        feedVO.setF_date(java.sql.Timestamp.valueOf(request.getParameter("f_date")));
+        System.out.println(feedVO.getU_id() + "/" + request.getParameter("f_start") );
+        feedVO.setF_start(java.sql.Timestamp.valueOf(request.getParameter("f_start")));
 
         ArrayList<FeedVO> arrayList =  diaryMapper.getAllFeedListByDate(feedVO);
 
