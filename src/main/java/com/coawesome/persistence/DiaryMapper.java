@@ -96,8 +96,15 @@ public interface DiaryMapper {
             "   INNER JOIN user ON user.u_id = feed_list.u_id" +
             "   WHERE feed_list.u_id = #{u_id} " +
             "   ORDER BY feed_list.f_start DESC")
-    ArrayList<SleepVO> getAllFeedList(UserVO userVO);
+    ArrayList<FeedVO> getAllFeedList(UserVO userVO);
 
+
+    //다이어리 수유시간 해당일자 리스트 조회
+    @Select("select * from feed_list " +
+            "   INNER JOIN user ON user.u_id = feed_list.u_id" +
+            "   WHERE feed_list.u_id = #{u_id} AND date(f_start) = date(#{f_date}) )" +
+            "   ORDER BY feed_list.f_start DESC")
+    ArrayList<FeedVO> getAllFeedListByDate(FeedVO feedVO);
 
 
 }

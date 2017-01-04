@@ -305,8 +305,8 @@ public class AppController {
     }
 
     //해당 날짜 수면시간 불러오기
-    @RequestMapping(value= "/getSleepTime",method= RequestMethod.POST)
-    public ArrayList<SleepVO> getSleepTime(HttpServletRequest request) {
+    @RequestMapping(value= "/getSleepTimeByDate",method= RequestMethod.POST)
+    public ArrayList<SleepVO> getSleepTimeByDate(HttpServletRequest request) {
         SleepVO sleepVO = new SleepVO();
 
         sleepVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
@@ -319,4 +319,20 @@ public class AppController {
         System.out.println(arrayList);
         return arrayList;
     }
+
+    @RequestMapping(value= "/getAllFeedTimeByDate",method= RequestMethod.POST)
+    public ArrayList<FeedVO> getAllFeedTimeByDate(HttpServletRequest request) {
+        FeedVO feedVO = new FeedVO();
+
+        feedVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
+
+        System.out.println(feedVO.getU_id() + "/" + request.getParameter("f_date") );
+        feedVO.setF_date(java.sql.Timestamp.valueOf(request.getParameter("f_date")));
+
+        ArrayList<FeedVO> arrayList =  diaryMapper.getAllFeedListByDate(feedVO);
+
+        return arrayList;
+    }
+
+
 }
