@@ -141,7 +141,14 @@ public class AppController {
         diaryVO.setC_treat(request.getParameter("c_treat"));
         diaryVO.setC_shot(request.getParameter("c_shot"));
 
-        diaryMapper.addDiary(diaryVO);
+
+        DiaryVO diaryExist = diaryMapper.getDiaryByDate(diaryVO);
+        if(diaryExist == null) {                                 //기존의 일지가 없으면
+            diaryMapper.updateDiaryWithPrevImg(diaryVO);
+        }
+        else {
+            diaryMapper.addDiary(diaryVO);
+        }
         System.out.println("diaryVO : " + diaryVO);
         return new ResultVO("정상 작동",1);
     }
