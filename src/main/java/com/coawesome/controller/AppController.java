@@ -156,7 +156,7 @@ public class AppController {
         diaryVO.setC_w(Float.parseFloat(request.getParameter("c_w")));
         diaryVO.setC_hospital(request.getParameter("c_hospital"));
         diaryVO.setC_memo(request.getParameter("c_memo"));
-        if(request.getParameter("c_next") != null) {
+        if(request.getParameter("c_next").toString() != "0") {
             diaryVO.setC_next(java.sql.Timestamp.valueOf(request.getParameter("c_next")));
         }
         diaryVO.setC_treat(request.getParameter("c_treat"));

@@ -21,7 +21,7 @@ public class DiaryVO {
     private String c_hospital;       //병원
     private String c_treat=null;     //증상(열,감기,설사)
     private String c_shot=null;      //접종 주사
-    private java.sql.Timestamp c_next = java.sql.Timestamp.valueOf("0000-00-00 00:00:00");  //예상 진료일
+    private java.sql.Timestamp c_next = null;  //예상 진료일
     private String c_depart;                    //진료과
     private String c_img;                       //이미지
     private String c_memo;                      //엄마일기
