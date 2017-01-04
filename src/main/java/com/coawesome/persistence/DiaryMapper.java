@@ -79,12 +79,17 @@ public interface DiaryMapper {
             "   INNER JOIN user ON user.u_id = sleep_list.u_id" +
             "   WHERE sleep_list.u_id = #{u_id} " +
             "   ORDER BY sleep_list.f_start DESC")
-    ArrayList<SleepVO> getAllSleepList(UserVO userVO);
+    ArrayList<SleepVO> getAllSleepList(SleepVO sleepVO);
 
     //해당 날짜 다이어리 수면시간 리스트 보기
     @Select("select * from sleep_list WHERE u_id = #{u_id} AND date(s_start) = date(#{s_start}) ")
     ArrayList<SleepVO> getSleepTime(SleepVO sleepVO);
 
+    //수면시간 일자별로 보기
+    @Select("select cast(MAX(s_start) as DATE) as s_start, SUM(s_total) as s_total from sleep_list WHERE u_id = #{u_id} " +
+            "GROUP BY cast(s_start as DATE) " +
+            "ORDER BY s_start DESC")
+    ArrayList<SleepVO> getDateSleepTime(SleepVO sleepVO);
 
     //다이어리 수유시간 쓰기
     @Insert("INSERT INTO feed_list(u_id, f_start, f_end, f_total, feed )" +
@@ -106,5 +111,10 @@ public interface DiaryMapper {
             "   ORDER BY feed_list.f_start DESC")
     ArrayList<FeedVO> getAllFeedListByDate(FeedVO feedVO);
 
+    //수유시간 일자별로 보기
+    @Select("SELECT cast(MAX(f_start) as DATE) as f_start, SUM(f_total) as f_total from feed_list WHERE u_id = #{u_id} " +
+            "GROUP BY cast(f_start as DATE) " +
+            "ORDER BY f_start DESC")
+    ArrayList<FeedVO> getDateFeedTime(FeedVO feedVO);
 
 }

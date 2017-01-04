@@ -300,7 +300,11 @@ public class AppController {
 
     @RequestMapping(value= "/getAllSleepList",method= RequestMethod.POST)
     public ArrayList<SleepVO> getAllSleepList(HttpServletRequest request) {
-        ArrayList<SleepVO> sleepList = new ArrayList<>();
+        SleepVO sleepVO = new SleepVO();
+
+        sleepVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
+
+        ArrayList<SleepVO> sleepList = diaryMapper.getAllSleepList(sleepVO);
         return sleepList;
     }
 
@@ -334,5 +338,25 @@ public class AppController {
         return arrayList;
     }
 
+    @RequestMapping(value= "/getDateSleepTime",method= RequestMethod.POST)
+    public ArrayList<SleepVO> getDateSleepTime(HttpServletRequest request) {
+        SleepVO sleepVO = new SleepVO();
 
+        sleepVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
+
+        ArrayList<SleepVO> arrayList =  diaryMapper.getDateSleepTime(sleepVO);
+
+        return arrayList;
+    }
+
+    @RequestMapping(value= "/getDateFeedTime",method= RequestMethod.POST)
+    public ArrayList<FeedVO> getDateFeedTime(HttpServletRequest request) {
+        FeedVO feedVO = new FeedVO();
+
+        feedVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
+
+        ArrayList<FeedVO> arrayList =  diaryMapper.getDateFeedTime(feedVO);
+
+        return arrayList;
+    }
 }
