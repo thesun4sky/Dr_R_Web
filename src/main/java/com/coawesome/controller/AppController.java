@@ -143,7 +143,7 @@ public class AppController {
 
 
         DiaryVO diaryExist = diaryMapper.getDiaryByDate(diaryVO);
-        if(diaryExist == null) {                                 //기존의 일지가 없으면
+        if(diaryExist != null) {                                 //기존의 일지가 없으면
             diaryMapper.updateDiaryWithPrevImg(diaryVO);
         }
         else {
@@ -173,7 +173,7 @@ public class AppController {
         diaryVO.setC_img(request.getParameter("c_img"));
 
         DiaryVO diaryExist = diaryMapper.getDiaryByDate(diaryVO);
-        if(diaryExist == null){                                 //기존의 일지가 없으면
+        if(diaryExist != null){                                 //기존의 일지가 없으면
             if(request.getParameter("c_img")!=null) {
                 ImageVO image = fileUtils.parseInsertFileInfo(file, diaryVO);
                 System.out.println("image : " + image);
