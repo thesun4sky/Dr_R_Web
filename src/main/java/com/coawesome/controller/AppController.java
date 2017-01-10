@@ -280,10 +280,10 @@ public class AppController {
 
         feedVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
 
-        System.out.println(feedVO.getU_id() + "/" + request.getParameter("s_start") + "/" + request.getParameter("s_end"));
-        feedVO.setF_start(java.sql.Timestamp.valueOf(request.getParameter("s_start")));
-        feedVO.setF_end(java.sql.Timestamp.valueOf(request.getParameter("s_end")));
-        feedVO.setF_total(Integer.parseInt(request.getParameter("s_total")));
+        System.out.println(feedVO.getU_id() + "/" + request.getParameter("f_start") + "/" + request.getParameter("f_end"));
+        feedVO.setF_start(java.sql.Timestamp.valueOf(request.getParameter("f_start")));
+        feedVO.setF_end(java.sql.Timestamp.valueOf(request.getParameter("f_end")));
+        feedVO.setF_total(Integer.parseInt(request.getParameter("f_total")));
         feedVO.setFeed(request.getParameter("feed"));
 
         diaryMapper.addFeedTime(feedVO);
