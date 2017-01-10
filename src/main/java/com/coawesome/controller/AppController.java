@@ -244,7 +244,7 @@ public class AppController {
         userVO.setU_sex(request.getParameter("u_sex"));
         userVO.setU_w(Float.parseFloat(request.getParameter("u_w")));
         userVO.setU_h(Float.parseFloat(request.getParameter("u_h")));
-        //TODO 이미지 추가    p_id
+        userVO.setU_born(java.sql.Timestamp.valueOf(request.getParameter("u_born")));
         System.out.println(userVO.toString());
         userMapper.addUser(userVO);
         return new ResultVO("정상 작동",1);

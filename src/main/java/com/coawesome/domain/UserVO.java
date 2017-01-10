@@ -25,4 +25,5 @@ public class UserVO {
     private float u_h;
     private int p_id;
     private int a_id;
+    private java.sql.Timestamp u_born = null; //출생일자
 }
