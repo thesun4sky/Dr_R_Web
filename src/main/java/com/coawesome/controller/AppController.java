@@ -335,6 +335,7 @@ public class AppController {
 
         ArrayList<FeedVO> arrayList =  diaryMapper.getFeedListByDate(feedVO);
 
+        System.out.println(arrayList);
         return arrayList;
     }
 
