@@ -57,6 +57,21 @@ public class AppController {
         }
     }
 
+    //교정연령계산을 위한 태어난 날짜 받아오기
+
+    @RequestMapping(value = "/getBornDate" , method = RequestMethod.POST)
+    public  UserVO getBornDate(HttpServletRequest request){
+        int user_id = Integer.parseInt(request.getParameter("u_id"));
+        System.out.println("Get Born Date" + user_id);
+        UserVO userVO = new UserVO();
+        userVO.setU_id(user_id);
+        Timestamp u_born = userMapper.getBornDate(userVO);
+        userVO.setU_born(u_born);
+
+        System.out.println(userVO);
+        return (userVO);
+    }
+
     @RequestMapping(value= "/checkLoginId",method= RequestMethod.POST)
     public ResultVO checkLoginId(HttpServletRequest request) {
         String login_id = request.getParameter("login_id");

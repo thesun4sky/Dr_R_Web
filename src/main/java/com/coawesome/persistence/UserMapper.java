@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.sql.Timestamp;
+
 /**
  * Created by TeasunKim on 2016-11-03.
  */
@@ -57,5 +59,9 @@ public interface UserMapper {
     //로그인
     @Select("select u_password from user where login_id = #{login_id}")
     String userLogincheck(UserVO user);
+
+    //출생일 받아오기
+    @Select("select u_born from user where u_id = #[u_id]")
+    Timestamp getBornDate(UserVO user);
 
 }
