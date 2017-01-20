@@ -78,8 +78,8 @@ public interface DiaryMapper {
     @Select("select * from sleep_list " +
             "   INNER JOIN user ON user.u_id = sleep_list.u_id" +
             "   WHERE sleep_list.u_id = #{u_id} " +
-            "   ORDER BY sleep_list.f_start DESC")
-    ArrayList<SleepVO> getAllSleepList(SleepVO sleepVO);
+            "   ORDER BY sleep_list.s_start DESC")
+    ArrayList<SleepVO> getAllSleepList(UserVO userVO);
 
     //해당 날짜 다이어리 수면시간 리스트 보기
     @Select("select * from sleep_list WHERE u_id = #{u_id} AND date(s_start) = date(#{s_start}) ")

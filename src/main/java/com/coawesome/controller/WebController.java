@@ -131,6 +131,29 @@ public class WebController {
     }
 
 
+    //수면일지 리스트 보기
+    @RequestMapping(method = RequestMethod.POST, value = "diary/getSleepList")
+    public ArrayList<SleepVO> getSleepList(@RequestBody UserVO userVO) throws Exception {
+        //TODO 중복체크
+        ArrayList<SleepVO> sleepVOs = diaryMapper.getAllSleepList(userVO);
+        System.out.println("sleep list of : " + userVO.getU_id());
+
+
+        return sleepVOs;
+    }
+
+
+    //수유일지 리스트 보기
+    @RequestMapping(method = RequestMethod.POST, value = "diary/getFeedList")
+    public ArrayList<FeedVO> getFeedList(@RequestBody UserVO userVO) throws Exception {
+        //TODO 중복체크
+        ArrayList<FeedVO> feedVOs = diaryMapper.getAllFeedList(userVO);
+        System.out.println("feed list of : " + userVO.getU_id());
+
+
+        return feedVOs;
+    }
+
     //다이어리 리스트 보기
     @RequestMapping(method = RequestMethod.POST, value = "diary/getDiaryList")
     public ArrayList<DiaryVO> getDiaryList(@RequestBody UserVO userVO) throws Exception {

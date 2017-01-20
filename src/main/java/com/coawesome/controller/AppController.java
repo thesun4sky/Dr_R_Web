@@ -315,11 +315,11 @@ public class AppController {
 
     @RequestMapping(value= "/getAllSleepList",method= RequestMethod.POST)
     public ArrayList<SleepVO> getAllSleepList(HttpServletRequest request) {
-        SleepVO sleepVO = new SleepVO();
+        UserVO userVO = new UserVO();
 
-        sleepVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
+        userVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
 
-        ArrayList<SleepVO> sleepList = diaryMapper.getAllSleepList(sleepVO);
+        ArrayList<SleepVO> sleepList = diaryMapper.getAllSleepList(userVO);
         return sleepList;
     }
 
