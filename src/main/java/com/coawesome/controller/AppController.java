@@ -38,29 +38,28 @@ public class AppController {
     private FileUtils fileUtils;
 
 
-    @RequestMapping(value= "/checkUserDevice",method= RequestMethod.POST)
+    @RequestMapping(value = "/checkUserDevice", method = RequestMethod.POST)
     public ResultVO checkUserDevice(HttpServletRequest request) {
         UserVO userVO = new UserVO();
         userVO.setU_device(request.getParameter("u_device"));
         System.out.println("u_device : " + userVO.getU_device());
         int found_device = userMapper.checkUserDevice(userVO);
 //        if(userVO.getU_device().equals(found_device)){
-        if(found_device > 0){
+        if (found_device > 0) {
             System.out.println("device 있음. 자동로그인");
             userVO.setU_name(userMapper.findName(userVO).getU_name());
             userVO.setU_id(userMapper.findName(userVO).getU_id());
-            return new ResultVO(userVO.getU_name(),userVO.getU_id());
-        }
-        else {
+            return new ResultVO(userVO.getU_name(), userVO.getU_id());
+        } else {
             System.out.println("아이디 없음. ");
-            return new ResultVO("회원가입 필요",-1);
+            return new ResultVO("회원가입 필요", -1);
         }
     }
 
     //교정연령계산을 위한 태어난 날짜 받아오기
 
-    @RequestMapping(value = "/getBornDate" , method = RequestMethod.POST)
-    public  UserVO getBornDate(HttpServletRequest request){
+    @RequestMapping(value = "/getBornDate", method = RequestMethod.POST)
+    public UserVO getBornDate(HttpServletRequest request) {
         int user_id = Integer.parseInt(request.getParameter("u_id"));
         System.out.println("Get Born Date" + user_id);
         UserVO userVO = new UserVO();
@@ -72,7 +71,21 @@ public class AppController {
         return (userVO);
     }
 
-    @RequestMapping(value= "/checkLoginId",method= RequestMethod.POST)
+    //성별 받아오기
+    @RequestMapping(value = "getSex", method = RequestMethod.POST)
+    public UserVO getSex(HttpServletRequest request) {
+        int user_id = Integer.parseInt(request.getParameter("u_id"));
+        System.out.println("Get User Sex" + user_id);
+        UserVO userVO = new UserVO();
+        userVO.setU_id(user_id);
+        String u_sex = userMapper.getSex(userVO);
+        userVO.setU_sex(u_sex);
+
+        System.out.println(userVO);
+        return (userVO);
+    }
+
+    @RequestMapping(value = "/checkLoginId", method = RequestMethod.POST)
     public ResultVO checkLoginId(HttpServletRequest request) {
         String login_id = request.getParameter("login_id");
         System.out.println("Login_id check : " + login_id);
@@ -80,17 +93,16 @@ public class AppController {
         userVO.setLogin_id(login_id);
         int found_id = userMapper.checkUserLoginId(userVO);
 //        if(userVO.getLogin_id().equals(found_id)){
-        if(found_id > 0){
+        if (found_id > 0) {
             //System.out.println("아이디 있음. 사용 불가");
-            return new ResultVO("아이디가 중복됩니다.",-1);
-        }
-        else {
+            return new ResultVO("아이디가 중복됩니다.", -1);
+        } else {
             //System.out.println("아이디 없음. 사용 가능");
-            return new ResultVO("사용가능한 아이디 입니다.",0);
+            return new ResultVO("사용가능한 아이디 입니다.", 0);
         }
     }
 
-    @RequestMapping(value= "/findUserId",method= RequestMethod.POST)
+    @RequestMapping(value = "/findUserId", method = RequestMethod.POST)
     public ResultVO findUserId(HttpServletRequest request) {
         String device = request.getParameter("u_device");
         System.out.println("device check : " + device);
@@ -98,19 +110,19 @@ public class AppController {
         userVO.setU_device(device);
         int found_userId = userMapper.findUserId(userVO);
 
-        return new ResultVO("정상 작동",found_userId);
+        return new ResultVO("정상 작동", found_userId);
     }
 
-    @RequestMapping(value = "/getHospital",method = RequestMethod.GET)
-    public ArrayList<Map> getHospital(){
+    @RequestMapping(value = "/getHospital", method = RequestMethod.GET)
+    public ArrayList<Map> getHospital() {
         ArrayList<Map> array = doctorMapper.getHospital();
 
         return array;
     }
 
 
-    @RequestMapping(value="/login",method = RequestMethod.POST)
-    public ResultVO checkLogin(HttpServletRequest request){
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ResultVO checkLogin(HttpServletRequest request) {
         String login_id = request.getParameter("login_id");
         String u_password = request.getParameter("u_password");
         System.out.println("try login : " + login_id);
@@ -121,26 +133,26 @@ public class AppController {
         int found_id = userMapper.checkUserLoginId(userVO);
         if (!(found_id > 0)) {
             System.out.println("login   failed");
-            return new ResultVO("",-1);
+            return new ResultVO("", -1);
         }
         String found_password = userMapper.userLogincheck(userVO);
 
         String u_name = userMapper.findNameById(userVO).getU_name();
         int u_id = userMapper.findNameById(userVO).getU_id();
 
-        if(u_password.equals(found_password)){
+        if (u_password.equals(found_password)) {
             System.out.println("login success" + u_name);
             userMapper.deleteDeviceID(userVO);
             userMapper.setDeviceID(userVO);
             return new ResultVO(u_name, u_id);
-        }
-        else{
+        } else {
             System.out.println("login   failed" + "");
-            return new ResultVO("",-1);
+            return new ResultVO("", -1);
         }
 
     }
-    @RequestMapping(value= "/writeDiary",method= RequestMethod.POST)
+
+    @RequestMapping(value = "/writeDiary", method = RequestMethod.POST)
     public ResultVO writeDiary(HttpServletRequest request) {
         DiaryVO diaryVO = new DiaryVO();
         diaryVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
@@ -150,7 +162,7 @@ public class AppController {
         diaryVO.setC_w(Float.parseFloat(request.getParameter("c_w")));
         diaryVO.setC_hospital(request.getParameter("c_hospital"));
         diaryVO.setC_memo(request.getParameter("c_memo"));
-        if(request.getParameter("c_next").toString() != "0") {
+        if (request.getParameter("c_next").toString() != "0") {
             diaryVO.setC_next(request.getParameter("c_next"));
         }
         diaryVO.setC_treat(request.getParameter("c_treat"));
@@ -158,18 +170,17 @@ public class AppController {
 
 
         DiaryVO diaryExist = diaryMapper.getDiaryByDate(diaryVO);
-        if(diaryExist != null && diaryExist.getC_img() != null) {                                 //기존의 일지가 없으면
+        if (diaryExist != null && diaryExist.getC_img() != null) {                                 //기존의 일지가 없으면
             diaryMapper.updateDiaryWithPrevImg(diaryVO);
-        }
-        else if(diaryExist == null) {
+        } else if (diaryExist == null) {
             diaryMapper.addDiary(diaryVO);
         }
         System.out.println("diaryVO : " + diaryVO);
-        return new ResultVO("정상 작동",1);
+        return new ResultVO("정상 작동", 1);
     }
 
 
-    @RequestMapping(value= "/writeDiaryWithImg",method= RequestMethod.POST)
+    @RequestMapping(value = "/writeDiaryWithImg", method = RequestMethod.POST)
     public ResultVO writeDiaryWithImg(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception {
         DiaryVO diaryVO = new DiaryVO();
 
@@ -180,7 +191,7 @@ public class AppController {
         diaryVO.setC_w(Float.parseFloat(request.getParameter("c_w")));
         diaryVO.setC_hospital(request.getParameter("c_hospital"));
         diaryVO.setC_memo(request.getParameter("c_memo"));
-        if(request.getParameter("c_next").toString() != "0") {
+        if (request.getParameter("c_next").toString() != "0") {
             diaryVO.setC_next(request.getParameter("c_next"));
         }
         diaryVO.setC_treat(request.getParameter("c_treat"));
@@ -188,31 +199,28 @@ public class AppController {
         diaryVO.setC_img(request.getParameter("c_img"));
 
         DiaryVO diaryExist = diaryMapper.getDiaryByDate(diaryVO);
-        if(diaryExist == null){                                 //기존의 일지가 없으면
-            if(request.getParameter("c_img")!=null) {
+        if (diaryExist == null) {                                 //기존의 일지가 없으면
+            if (request.getParameter("c_img") != null) {
                 ImageVO image = fileUtils.parseInsertFileInfo(file, diaryVO);
                 System.out.println("image : " + image);
                 diaryVO.setC_img(image.getStored_file_name());
                 diaryMapper.addDiaryWithImg(diaryVO);
-            }
-            else diaryMapper.addDiary(diaryVO);
-        }
-        else{
-            if(request.getParameter("c_img")!=null) {
+            } else diaryMapper.addDiary(diaryVO);
+        } else {
+            if (request.getParameter("c_img") != null) {
                 ImageVO image = fileUtils.parseInsertFileInfo(file, diaryVO);
                 System.out.println("image : " + image);
                 diaryVO.setC_img(image.getStored_file_name());
                 diaryMapper.updateDiaryWithNewImg(diaryVO);
-            }
-            else diaryMapper.updateDiaryWithPrevImg(diaryVO);
+            } else diaryMapper.updateDiaryWithPrevImg(diaryVO);
 
         }
 
         System.out.println("diaryVO : " + diaryVO);
-        return new ResultVO("정상 작동",1);
+        return new ResultVO("정상 작동", 1);
     }
 
-    @RequestMapping(value= "/getDiary",method= RequestMethod.POST)
+    @RequestMapping(value = "/getDiary", method = RequestMethod.POST)
     public DiaryVO getDiary(HttpServletRequest request) {
         //TODO 중복체크
         DiaryVO diaryVO = new DiaryVO();
@@ -225,12 +233,12 @@ public class AppController {
     }
 
 
-    @RequestMapping(value= "/getQnaList",method= RequestMethod.GET)
+    @RequestMapping(value = "/getQnaList", method = RequestMethod.GET)
     public ArrayList<QnaVO> getQnaList(HttpServletRequest request) {
         return qnaMapper.getQnaList();
     }
 
-    @RequestMapping(value= "/makeQuestion",method= RequestMethod.POST)
+    @RequestMapping(value = "/makeQuestion", method = RequestMethod.POST)
     public ResultVO makeQuestion(HttpServletRequest request) {
         QnaVO qnaVO = new QnaVO();
         qnaVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
@@ -239,11 +247,11 @@ public class AppController {
         //date, count 는 sql에서 생성
         qnaMapper.makeQuestion(qnaVO);
 
-        return new ResultVO("정상 작동",1);
+        return new ResultVO("정상 작동", 1);
     }
 
 
-    @RequestMapping(value= "/joinUser",method= RequestMethod.POST)
+    @RequestMapping(value = "/joinUser", method = RequestMethod.POST)
     public ResultVO joinUser(HttpServletRequest request) {
         System.out.println("joinUser called");
 
@@ -262,10 +270,10 @@ public class AppController {
         userVO.setU_born(java.sql.Timestamp.valueOf(request.getParameter("u_born")));
         System.out.println(userVO.toString());
         userMapper.addUser(userVO);
-        return new ResultVO("정상 작동",1);
+        return new ResultVO("정상 작동", 1);
     }
 
-    @RequestMapping(value= "/getDocPhone",method= RequestMethod.POST)
+    @RequestMapping(value = "/getDocPhone", method = RequestMethod.POST)
     public Map getPhoneNum(HttpServletRequest request) {
         System.out.println("getPhoneNum called by " + request.getParameter("u_id"));
         UserVO userVO = new UserVO();
@@ -273,7 +281,7 @@ public class AppController {
         return doctorMapper.getDocPhone(userVO);
     }
 
-    @RequestMapping(value= "/addSleepTime",method= RequestMethod.POST)
+    @RequestMapping(value = "/addSleepTime", method = RequestMethod.POST)
     public ResultVO addSleepTime(HttpServletRequest request) {
         SleepVO sleepVO = new SleepVO();
 
@@ -286,10 +294,10 @@ public class AppController {
 
         diaryMapper.addSleepTime(sleepVO);
 
-        return new ResultVO("정상 작동",1);
+        return new ResultVO("정상 작동", 1);
     }
 
-    @RequestMapping(value= "/addFeedTime",method= RequestMethod.POST)
+    @RequestMapping(value = "/addFeedTime", method = RequestMethod.POST)
     public ResultVO addFeedTime(HttpServletRequest request) {
         FeedVO feedVO = new FeedVO();
 
@@ -303,17 +311,17 @@ public class AppController {
 
         diaryMapper.addFeedTime(feedVO);
 
-        return new ResultVO("정상 작동",1);
+        return new ResultVO("정상 작동", 1);
     }
 
-    @RequestMapping(value= "/getAllFeedList",method= RequestMethod.POST)
+    @RequestMapping(value = "/getAllFeedList", method = RequestMethod.POST)
     public ArrayList<FeedVO> getAllFeedList(HttpServletRequest request) {
         ArrayList<FeedVO> feedList = new ArrayList<>();
 
         return feedList;
     }
 
-    @RequestMapping(value= "/getAllSleepList",method= RequestMethod.POST)
+    @RequestMapping(value = "/getAllSleepList", method = RequestMethod.POST)
     public ArrayList<SleepVO> getAllSleepList(HttpServletRequest request) {
         UserVO userVO = new UserVO();
 
@@ -324,57 +332,57 @@ public class AppController {
     }
 
     //해당 날짜 수면시간 불러오기
-    @RequestMapping(value= "/getSleepTimeByDate",method= RequestMethod.POST)
+    @RequestMapping(value = "/getSleepTimeByDate", method = RequestMethod.POST)
     public ArrayList<SleepVO> getSleepTimeByDate(HttpServletRequest request) {
         SleepVO sleepVO = new SleepVO();
 
         sleepVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
 
-        System.out.println(sleepVO.getU_id() + "/" + request.getParameter("s_start") );
+        System.out.println(sleepVO.getU_id() + "/" + request.getParameter("s_start"));
         sleepVO.setS_start(java.sql.Timestamp.valueOf(request.getParameter("s_start")));
 
-        ArrayList<SleepVO> arrayList =  diaryMapper.getSleepTime(sleepVO);
+        ArrayList<SleepVO> arrayList = diaryMapper.getSleepTime(sleepVO);
 
         System.out.println(arrayList);
         return arrayList;
     }
 
-    @RequestMapping(value= "/getFeedTimeByDate",method= RequestMethod.POST)
+    @RequestMapping(value = "/getFeedTimeByDate", method = RequestMethod.POST)
     public ArrayList<FeedVO> getFeedTimeByDate(HttpServletRequest request) {
         FeedVO feedVO = new FeedVO();
 
         feedVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
 
-        System.out.println(feedVO.getU_id() + "/" + request.getParameter("f_start") );
+        System.out.println(feedVO.getU_id() + "/" + request.getParameter("f_start"));
         feedVO.setF_start(java.sql.Timestamp.valueOf(request.getParameter("f_start")));
 
-        ArrayList<FeedVO> arrayList =  diaryMapper.getFeedListByDate(feedVO);
+        ArrayList<FeedVO> arrayList = diaryMapper.getFeedListByDate(feedVO);
 
         System.out.println(arrayList);
         return arrayList;
     }
 
-    @RequestMapping(value= "/getDateSleepTime",method= RequestMethod.POST)
+    @RequestMapping(value = "/getDateSleepTime", method = RequestMethod.POST)
     public ArrayList<SleepVO> getDateSleepTime(HttpServletRequest request) {
         SleepVO sleepVO = new SleepVO();
 
         sleepVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
 
-        ArrayList<SleepVO> arrayList =  diaryMapper.getDateSleepTime(sleepVO);
-        System.out.println("getDateSleepTime"+ arrayList);
+        ArrayList<SleepVO> arrayList = diaryMapper.getDateSleepTime(sleepVO);
+        System.out.println("getDateSleepTime" + arrayList);
 
         return arrayList;
     }
 
-    @RequestMapping(value= "/getDateFeedTime",method= RequestMethod.POST)
+    @RequestMapping(value = "/getDateFeedTime", method = RequestMethod.POST)
     public ArrayList<FeedVO> getDateFeedTime(HttpServletRequest request) {
         FeedVO feedVO = new FeedVO();
 
         feedVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
 
-        ArrayList<FeedVO> arrayList =  diaryMapper.getDateFeedTime(feedVO);
+        ArrayList<FeedVO> arrayList = diaryMapper.getDateFeedTime(feedVO);
 
-        System.out.println("getDateFeedTime"+ arrayList);
+        System.out.println("getDateFeedTime" + arrayList);
         return arrayList;
     }
 

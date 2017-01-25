@@ -64,4 +64,8 @@ public interface UserMapper {
     @Select("select u_born from user where u_id = #{u_id}")
     Timestamp getBornDate(UserVO user);
 
+    //성별 받아오기
+    @Select("select u_sex from user where u_id = #{u_id}")
+    String getSex(UserVO user);
+
 }
