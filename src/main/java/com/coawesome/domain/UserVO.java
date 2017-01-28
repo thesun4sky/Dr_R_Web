@@ -18,6 +18,7 @@ public class UserVO {
     private String u_name;
     private int u_a_week;
     private int u_a_date;
+    private int u_b_year;
     private int u_b_month;
     private int u_b_date;
     private String u_sex;

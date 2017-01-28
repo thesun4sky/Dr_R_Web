@@ -64,9 +64,10 @@ public class AppController {
         System.out.println("Get Born Date" + user_id);
         UserVO userVO = new UserVO();
         userVO.setU_id(user_id);
-        Timestamp u_born = userMapper.getBornDate(userVO);
-        userVO.setU_born(u_born);
-
+        userVO.setU_b_year(userMapper.getBornDate(userVO).getU_b_year());
+        userVO.setU_b_month(userMapper.getBornDate(userVO).getU_b_month());
+        userVO.setU_b_date(userMapper.getBornDate(userVO).getU_b_date());
+        userVO.setU_born(userMapper.getBornDate(userVO).getU_born());
         System.out.println(userVO);
         return (userVO);
     }
@@ -172,7 +173,11 @@ public class AppController {
         DiaryVO diaryExist = diaryMapper.getDiaryByDate(diaryVO);
         if (diaryExist != null && diaryExist.getC_img() != null) {                                 //기존의 일지가 없으면
             diaryMapper.updateDiaryWithPrevImg(diaryVO);
-        } else if (diaryExist == null) {
+        }
+        else if(diaryExist!= null && diaryExist.getC_img() == null){
+            diaryMapper.updateDiaryWithPrevImg(diaryVO);
+        }
+        else if (diaryExist == null) {
             diaryMapper.addDiary(diaryVO);
         }
         System.out.println("diaryVO : " + diaryVO);
