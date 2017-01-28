@@ -273,6 +273,7 @@ public class AppController {
         userVO.setU_w(Float.parseFloat(request.getParameter("u_w")));
         userVO.setU_h(Float.parseFloat(request.getParameter("u_h")));
         userVO.setU_born(java.sql.Timestamp.valueOf(request.getParameter("u_born")));
+        userVO.setU_join_date(java.sql.Timestamp.valueOf(request.getParameter("u_join_date")));
         System.out.println(userVO.toString());
         userMapper.addUser(userVO);
         return new ResultVO("정상 작동", 1);
