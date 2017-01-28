@@ -61,7 +61,7 @@ public interface UserMapper {
     String userLogincheck(UserVO user);
 
     //출생일 받아오기
-    @Select("select a_b_year, a_b_month, a_b_date, u_born from user where u_id = #{u_id}")
+    @Select("select u_b_year, u_b_month, u_b_date, u_born from user where u_id = #{u_id}")
     UserVO getBornDate(UserVO user);
 
     //성별 받아오기
