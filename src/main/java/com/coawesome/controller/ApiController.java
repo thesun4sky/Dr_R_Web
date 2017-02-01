@@ -10,7 +10,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -41,6 +43,8 @@ public class ApiController {
     @RequestMapping(method = RequestMethod.POST, value = "/api/addData")
     public String addData(@RequestBody DataVO dataVO) throws Exception {
         System.out.println("Add Data of : " + dataVO.getU_id());
+        java.sql.Timestamp today = new Timestamp(System.currentTimeMillis());
+        dataVO.setD_date(today);
         dataMapper.addData(dataVO);
         return "true";
     }

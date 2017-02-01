@@ -15,8 +15,8 @@ import java.util.ArrayList;
 public interface DataMapper {
 
     //데이터 쓰기
-    @Insert("INSERT INTO data_list(u_id, d_temperature, d_dust, d_co2, d_voc)" +
-            " VALUES(#{u_id}, #{d_temperature}, #{d_dust}, #{d_co2}, #{d_voc})")
+    @Insert("INSERT INTO data_list(u_id, d_temperature, d_dust, d_co2, d_voc, d_date)" +
+            " VALUES(#{u_id}, #{d_temperature}, #{d_dust}, #{d_co2}, #{d_voc}, #{d_date})")
     void addData(DataVO dataVO);
 
 

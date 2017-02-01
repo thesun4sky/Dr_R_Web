@@ -17,6 +17,7 @@ public class DataVO {
     private double d_dust;            //미세먼지
     private double d_co2;            //이산화탄소
     private double d_voc;            //VOC
+    private java.sql.Timestamp d_date = null;   //작성일
 }
 /**
 
