@@ -42,6 +42,10 @@ public interface DiaryMapper {
     @Select("select * from check_list INNER JOIN user ON user.u_id = check_list.u_id where check_list.u_id = #{u_id} ORDER BY c_date DESC")
     ArrayList<DiaryVO> getDiaryList(UserVO userVO);
 
+    //다이어리 리스트 보기
+    @Select("select * from data_list INNER JOIN user ON user.u_id = data_list.u_id where data_list.u_id = #{u_id} ORDER BY d_date DESC")
+    ArrayList<DataVO> getDataList(UserVO userVO);
+
     //다이어리 보기
     @Select("select * from check_list INNER JOIN user ON user.u_id = check_list.u_id where check_list.u_id = #{u_id} AND check_list.c_date = #{c_date} LIMIT 1")
     DiaryVO getDiaryByDate(DiaryVO diaryVO);

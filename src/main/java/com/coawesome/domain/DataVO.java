@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class DataVO {
     private int d_id;
     private int u_id;                 //계정ID
+    private String u_name;
     private double d_temperature;            //온도
     private double d_dust;            //미세먼지
     private double d_co2;            //이산화탄소

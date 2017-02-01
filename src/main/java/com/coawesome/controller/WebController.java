@@ -77,7 +77,7 @@ public class WebController {
         System.out.println("Login Check : " + doctor.getE_mail());
         String input_pass = doctor.getA_password();
         String password = doctorMapper.doctorLogincheck(doctor);
-        int u_id = doctorMapper.findA_id(doctor);
+//        int u_id = doctorMapper.findA_id(doctor);
         System.out.println("패스워드 일치 체크 ");
         //복호화된 패스워드와 일치 확인
         if(password != null) {
@@ -86,7 +86,7 @@ public class WebController {
 //            if (input_pass.equals(password)) {
             if (input_pass.equals(des_pass)) {
                 System.out.println("비밀번호 일치" );
-                return new ResultVO(doctorMapper.findName(doctor),u_id);
+                return new ResultVO(doctorMapper.findName(doctor),1);
             } else {
                 System.out.println("비밀번호 불일치" );
                 return new ResultVO("비밀번호가 다릅니다",0);
@@ -165,6 +165,17 @@ public class WebController {
         return diaryVO;
     }
 
+
+    //다이어리 리스트 보기
+    @RequestMapping(method = RequestMethod.POST, value = "diary/getDataList")
+    public ArrayList<DataVO> getDataList(@RequestBody UserVO userVO) throws Exception {
+        //TODO 중복체크
+        ArrayList<DataVO> dataVO = diaryMapper.getDataList(userVO);
+        System.out.println("data list of : " + userVO.getU_id());
+
+
+        return dataVO;
+    }
 
 
     //다이어리 전체 리스트 보기
