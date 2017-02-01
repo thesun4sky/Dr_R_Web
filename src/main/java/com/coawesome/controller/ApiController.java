@@ -43,7 +43,7 @@ public class ApiController {
     @RequestMapping(method = RequestMethod.POST, value = "/api/addData")
     public String addData(@RequestBody DataVO dataVO) throws Exception {
         System.out.println("Add Data of : " + dataVO.getU_id());
-        java.sql.Timestamp today = new Timestamp(System.currentTimeMillis());
+        java.sql.Timestamp today = new Timestamp(System.currentTimeMillis()+32400000);
         dataVO.setD_date(today);
         dataMapper.addData(dataVO);
         return "true";
