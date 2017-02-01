@@ -56,12 +56,12 @@ public interface DiaryMapper {
 
 
     //다이어리 존재확인 API
-    @Select("select COUNT(*) from check_list where u_id = #{u_id} AND (to_days(now())-to_days(c_date) <= -1 ) AND (to_days(now())-to_days(c_date) > 0 )")
+    @Select("select COUNT(*) from check_list where u_id = #{u_id} AND (to_days(now()+32400000)-to_days(c_date) <= -1 ) AND (to_days(now()+32400000)-to_days(c_date) > 0 )")
     int getPatientValue(DiaryVO diaryVO);
 
     //다이어리 입력 API
     @Update("update check_list SET c_temperature = #{c_temperature}, c_humid = #{c_humid} " +
-            "WHERE u_id = #{u_id} AND (to_days(now())-to_days(c_date) <= -1 ) AND (to_days(now())-to_days(c_date) > 0 )")
+            "WHERE u_id = #{u_id} AND (to_days(now()+32400000)-to_days(c_date) <= -1 ) AND (to_days(now()+32400000)-to_days(c_date) > 0 )")
     void setPatientValue(DiaryVO diaryVO);
 
     //지정날짜 다이어리 입력 API
