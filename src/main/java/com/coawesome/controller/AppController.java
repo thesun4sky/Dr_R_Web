@@ -320,6 +320,22 @@ public class AppController {
         return new ResultVO("정상 작동", 1);
     }
 
+
+    @RequestMapping(value = "/updateFeed", method = RequestMethod.POST)
+    public ResultVO updateFeed(HttpServletRequest request) {
+        FeedVO feedVO = new FeedVO();
+
+        feedVO.setU_id(Integer.parseInt(request.getParameter("u_id")));
+
+        System.out.println("update" + feedVO.getU_id() + "/" + request.getParameter("f_start"));
+        feedVO.setF_start(java.sql.Timestamp.valueOf(request.getParameter("f_start")));
+        feedVO.setF_total(Integer.parseInt(request.getParameter("f_total")));
+
+        diaryMapper.updateFeed(feedVO);
+
+        return new ResultVO("정상 작동", 1);
+    }
+
     @RequestMapping(value = "/getAllFeedList", method = RequestMethod.POST)
     public ArrayList<FeedVO> getAllFeedList(HttpServletRequest request) {
         ArrayList<FeedVO> feedList = new ArrayList<>();

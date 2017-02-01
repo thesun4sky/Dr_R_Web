@@ -91,6 +91,10 @@ public interface DiaryMapper {
             " VALUES(#{u_id}, #{f_start}, #{f_end}, #{f_total}, #{feed})")
     void addFeedTime(FeedVO feedVO);
 
+    //분유량 수정
+    @Update("UPDATE feed_list SET f_total = #{f_total} WHERE u_id = #{u_id} AND f_start = #{f_start} ")
+    void updateFeed(FeedVO feedVO);
+
     //다이어리 수유시간 리스트 보기
     @Select("select * from feed_list " +
             "   INNER JOIN user ON user.u_id = feed_list.u_id" +
