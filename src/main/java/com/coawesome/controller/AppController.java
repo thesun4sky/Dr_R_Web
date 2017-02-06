@@ -58,12 +58,13 @@ public class AppController {
 
     //교정연령계산을 위한 태어난 날짜 받아오기
 
-    @RequestMapping(value = "/getExpectedDate", method = RequestMethod.POST)
-    public UserVO getExpectedDate(HttpServletRequest request) {
+    @RequestMapping(value = "/getUserDate", method = RequestMethod.POST)
+    public UserVO getUserDate(HttpServletRequest request) {
         int user_id = Integer.parseInt(request.getParameter("u_id"));
         UserVO userVO = new UserVO();
         userVO.setU_id(user_id);
         userVO.setU_expected(userMapper.getDetail(userVO).getU_expected());
+        userVO.setU_join_date(userMapper.getDetail(userVO).getU_join_date());
         System.out.println(userVO);
         return (userVO);
     }
