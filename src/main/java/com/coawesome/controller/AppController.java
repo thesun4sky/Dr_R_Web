@@ -255,6 +255,7 @@ public class AppController {
     @RequestMapping(value = "/joinUser", method = RequestMethod.POST)
     public ResultVO joinUser(HttpServletRequest request) {
         System.out.println("joinUser called");
+        java.sql.Timestamp today = new Timestamp(System.currentTimeMillis()+32400000);
 
         UserVO userVO = new UserVO();
         userVO.setLogin_id(request.getParameter("login_id"));
@@ -268,7 +269,7 @@ public class AppController {
         userVO.setU_h(Float.parseFloat(request.getParameter("u_h")));
         userVO.setU_expected(java.sql.Timestamp.valueOf(request.getParameter("u_expected")));
         userVO.setU_born(java.sql.Timestamp.valueOf(request.getParameter("u_born")));
-        userVO.setU_join_date(java.sql.Timestamp.valueOf(request.getParameter("u_join_date")));
+        userVO.setU_join_date(today);
         System.out.println(userVO.toString());
         userMapper.addUser(userVO);
         return new ResultVO("정상 작동", 1);
