@@ -60,9 +60,9 @@ public interface UserMapper {
     @Select("select u_password from user where login_id = #{login_id}")
     String userLogincheck(UserVO user);
 
-    //출생일 받아오기
-    @Select("select u_b_year, u_b_month, u_b_date, u_born from user where u_id = #{u_id}")
-    UserVO getBornDate(UserVO user);
+    //사용자 정보
+    @Select("select * from user where u_id = #{u_id}")
+    UserVO getDetail(UserVO user);
 
     //성별 받아오기
     @Select("select u_sex from user where u_id = #{u_id}")

@@ -58,16 +58,12 @@ public class AppController {
 
     //교정연령계산을 위한 태어난 날짜 받아오기
 
-    @RequestMapping(value = "/getBornDate", method = RequestMethod.POST)
-    public UserVO getBornDate(HttpServletRequest request) {
+    @RequestMapping(value = "/getExpectedDate", method = RequestMethod.POST)
+    public UserVO getExpectedDate(HttpServletRequest request) {
         int user_id = Integer.parseInt(request.getParameter("u_id"));
-        System.out.println("Get Born Date" + user_id);
         UserVO userVO = new UserVO();
         userVO.setU_id(user_id);
-        userVO.setU_b_year(userMapper.getBornDate(userVO).getU_b_year());
-        userVO.setU_b_month(userMapper.getBornDate(userVO).getU_b_month());
-        userVO.setU_b_date(userMapper.getBornDate(userVO).getU_b_date());
-        userVO.setU_born(userMapper.getBornDate(userVO).getU_born());
+        userVO.setU_expected(userMapper.getDetail(userVO).getU_expected());
         System.out.println(userVO);
         return (userVO);
     }
@@ -267,11 +263,10 @@ public class AppController {
         userVO.setU_device(request.getParameter("u_device"));
         userVO.setU_a_week(Integer.parseInt(request.getParameter("u_a_week")));
         userVO.setU_a_date(Integer.parseInt(request.getParameter("u_a_date")));
-        userVO.setU_b_month(Integer.parseInt(request.getParameter("u_b_month")));
-        userVO.setU_b_date(Integer.parseInt(request.getParameter("u_b_date")));
         userVO.setU_sex(request.getParameter("u_sex"));
         userVO.setU_w(Float.parseFloat(request.getParameter("u_w")));
         userVO.setU_h(Float.parseFloat(request.getParameter("u_h")));
+        userVO.setU_expected(java.sql.Timestamp.valueOf(request.getParameter("u_expected")));
         userVO.setU_born(java.sql.Timestamp.valueOf(request.getParameter("u_born")));
         userVO.setU_join_date(java.sql.Timestamp.valueOf(request.getParameter("u_join_date")));
         System.out.println(userVO.toString());
