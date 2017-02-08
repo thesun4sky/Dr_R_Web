@@ -23,6 +23,7 @@ public class UserVO {
     private float u_h;
     private int p_id;
     private int a_id;
+    private int u_discharged=0;
     private java.sql.Timestamp u_expected = null; //예정일자
     private java.sql.Timestamp u_born = null; //출생일자
     private java.sql.Timestamp u_join_date =null;

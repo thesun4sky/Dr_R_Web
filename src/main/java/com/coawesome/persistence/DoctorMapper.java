@@ -52,8 +52,12 @@ public interface DoctorMapper {
     ArrayList<UserVO> getPatientList(DoctorVO doctorVO);
 
     //의사 병원 환자 리스트 찾기
-    @Select("select * from user")
+    @Select("select * from user ORDER BY u_name")
     ArrayList<UserVO> getAllPatientList(DoctorVO doctorVO);
+
+    //의사 병원 환자 리스트 찾기(성별)
+    @Select("select * from user WHERE u_sex = #{u_sex} ORDER BY u_name")
+    ArrayList<UserVO> getAllPatientListBySex(DoctorVO doctorVO);
 
     //의사 병원이름 가져오기
     @Select("select a_hospital from doctor WHERE a_id = #{a_id}")

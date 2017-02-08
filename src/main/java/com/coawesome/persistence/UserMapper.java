@@ -45,7 +45,7 @@ public interface UserMapper {
     UserVO findName(UserVO user);
 
     //login_id로 이름 찾기
-    @Select("select u_id, u_name from user where login_id = #{login_id}")
+    @Select("select ㅌu_id, u_name from user where login_id = #{login_id}")
     UserVO findNameById(UserVO user);
 
     //비밀번호 찾기
@@ -68,4 +68,11 @@ public interface UserMapper {
     @Select("select u_sex from user where u_id = #{u_id}")
     String getSex(UserVO user);
 
+    //퇴원
+    @Update("update  user SET u_discharged = 1 WHERE u_id = #{u_id}")
+    void discharged(UserVO userVO);
+
+    //재입원
+    @Update("update  user SET u_discharged = 0 WHERE u_id = #{u_id}")
+    void hospitalize(UserVO userVO);
 }

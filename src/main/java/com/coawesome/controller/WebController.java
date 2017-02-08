@@ -262,4 +262,22 @@ public class WebController {
         qnaMapper.answerQna(qnaVO);
         return new ResultVO("success",1);
     }
+
+    //퇴원처리
+    @RequestMapping(method = RequestMethod.POST, value = "api/discharged")
+    public ResultVO discharged(@RequestBody UserVO userVO) throws Exception {
+        //TODO 중복체크
+        System.out.println("discharged user of : " + userVO.getU_id());
+        userMapper.discharged(userVO);
+        return new ResultVO("success",1);
+    }
+
+    //재입원처리
+    @RequestMapping(method = RequestMethod.POST, value = "api/hospitalize")
+    public ResultVO hospitalize(@RequestBody UserVO userVO) throws Exception {
+        //TODO 중복체크
+        System.out.println("hospitalize user of : " + userVO.getU_id());
+        userMapper.hospitalize(userVO);
+        return new ResultVO("success",1);
+    }
 }
