@@ -188,19 +188,6 @@ public class WebController {
         return diaryVO;
     }
 
-
-    //환자 리스트 보기
-    @RequestMapping(method = RequestMethod.POST, value = "api/getPatientList")
-    public ArrayList<UserVO> getPatientList(@RequestBody DoctorVO doctorVO) throws Exception {
-        //TODO 중복체크
-        System.out.println("doctor : " + doctorVO);
-        ArrayList<UserVO> userVOs = doctorMapper.getPatientList(doctorVO);
-        System.out.println("patient list of : " + doctorVO.getA_name());
-
-        return userVOs;
-    }
-
-
     //전체 환자 리스트 보기
     @RequestMapping(method = RequestMethod.POST, value = "api/getAllPatientList")
     public ArrayList<UserVO> getAllPatientList(@RequestBody DoctorVO doctorVO) throws Exception {
