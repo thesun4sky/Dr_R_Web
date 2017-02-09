@@ -45,7 +45,7 @@ public interface UserMapper {
     UserVO findName(UserVO user);
 
     //login_id로 이름 찾기
-    @Select("select ㅌu_id, u_name from user where login_id = #{login_id}")
+    @Select("select u_id, u_name from user where login_id = #{login_id}")
     UserVO findNameById(UserVO user);
 
     //비밀번호 찾기
