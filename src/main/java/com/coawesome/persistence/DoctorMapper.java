@@ -46,12 +46,13 @@ public interface DoctorMapper {
     String findName(DoctorVO user);
 
     //환자 리스트 찾기
-    @Select("select * from user \n" +
-            "INNER JOIN user ON user.u_id = u.u_id\n")
-    ArrayList<UserVO> getPatientList(UserVO userVO);
+    @Select("select * from doctor \n" +
+            "INNER JOIN user ON user.u_id = d_u.u_id\n" +
+            "WHERE d_u.a_id = #{a_id}; ")
+    ArrayList<UserVO> getPatientList(DoctorVO doctorVO);
 
     //의사 병원 환자 리스트 찾기
-    @Select("select * from user ORDER BY u_name")
+    @Select("select * from user")
     ArrayList<UserVO> getAllPatientList(DoctorVO doctorVO);
 
     //의사 병원 환자 리스트 찾기(성별)

@@ -69,6 +69,7 @@ public class AppController {
         return (userVO);
     }
 
+
     //성별 받아오기
     @RequestMapping(value = "getSex", method = RequestMethod.POST)
     public UserVO getSex(HttpServletRequest request) {
