@@ -47,8 +47,7 @@ public interface DoctorMapper {
 
     //환자 리스트 찾기
     @Select("select * from doctor \n" +
-            "INNER JOIN user ON user.u_id = d_u.u_id\n" +
-            "WHERE d_u.a_id = #{a_id}; ")
+            "INNER JOIN user ON user.u_id = d_u.u_id\n")
     ArrayList<UserVO> getPatientList(DoctorVO doctorVO);
 
     //의사 병원 환자 리스트 찾기
