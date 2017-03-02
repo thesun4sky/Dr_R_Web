@@ -138,7 +138,6 @@ public class WebController {
         ArrayList<SleepVO> sleepVOs = diaryMapper.getAllSleepList(userVO);
         System.out.println("sleep list of : " + userVO.getU_id());
 
-
         return sleepVOs;
     }
 

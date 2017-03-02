@@ -1,7 +1,7 @@
 datasource:
   driver-class-name: "com.mysql.jdbc.Driver"
-  url: "jdbc:mysql://52.41.218.18:3306/Dr_R?useUnicode=true&charaterEncoding=utf-8"
-  user-name: "moon"
+  url: "jdbc:mysql://52.205.170.152:3306/Dr_R?useUnicode=true&charaterEncoding=utf-8"
+  user-name: "byoung"
   password: "1234"
   initial-size: 10
   max-active: 100
