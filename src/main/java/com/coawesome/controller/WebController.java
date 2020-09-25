@@ -7,6 +7,7 @@ import com.coawesome.persistence.DiaryMapper;
 import com.coawesome.persistence.DoctorMapper;
 import com.coawesome.persistence.QnaMapper;
 import com.coawesome.persistence.UserMapper;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +26,7 @@ import static java.lang.System.in;
  * Created by TeasunKim on 2016-11-03.
  */
 @RestController
+@Api(value = "AppController", description = "웹  API")
 @RequestMapping(value = "/web")
 public class WebController {
 

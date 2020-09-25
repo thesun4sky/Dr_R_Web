@@ -5,6 +5,8 @@ import com.coawesome.persistence.DiaryMapper;
 import com.coawesome.persistence.DoctorMapper;
 import com.coawesome.persistence.QnaMapper;
 import com.coawesome.persistence.UserMapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +24,7 @@ import java.util.Map;
  * Created by TeasunKim on 2016-11-09.
  */
 @RestController
+@Api(value = "AppController", description = "어플리케이션 API")
 public class AppController {
 
     @Autowired
@@ -39,6 +42,7 @@ public class AppController {
 
 
     @RequestMapping(value= "/checkUserDevice",method= RequestMethod.POST)
+    @ApiOperation(value = "userdevice info")
     public ResultVO checkUserDevice(HttpServletRequest request) {
         UserVO userVO = new UserVO();
         userVO.setU_device(request.getParameter("u_device"));
